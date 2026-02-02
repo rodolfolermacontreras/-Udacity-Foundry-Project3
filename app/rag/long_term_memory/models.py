@@ -64,3 +64,4 @@ class MemoryItem:
                 clean[key] = datetime.utcnow()
 
         return cls(**clean)
+

@@ -181,12 +181,12 @@ class CardTools:
                 }
             }
             
-            logger.info(f"✅ Recommended: {best_card['name']} with {best_multiplier}x points")
+            logger.info(f"[OK] Recommended: {best_card['name']} with {best_multiplier}x points")
             
             return result
             
         except Exception as e:
-            logger.error(f"❌ Error recommending card: {e}")
+            logger.error(f"[ERROR] Error recommending card: {e}")
             return {
                 "best": {
                     "card": "BankGold",
@@ -265,5 +265,5 @@ class CardTools:
             }
             
         except Exception as e:
-            logger.error(f"❌ Error getting card perks: {e}")
+            logger.error(f"[ERROR] Error getting card perks: {e}")
             return {"error": str(e)}

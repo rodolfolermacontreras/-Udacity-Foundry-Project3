@@ -1,0 +1,8 @@
+C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\rag\ingest.py:148: DeprecationWarning: There is no current event loop
+  loop = asyncio.get_event_loop()
+C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\rag\ingest.py:191: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "created_at": datetime.utcnow().isoformat(),
+C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\rag\ingest.py:192: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "updated_at": datetime.utcnow().isoformat()
+[START] Starting knowledge base ingestion...
+[OK] Ingested 7 documents

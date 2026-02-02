@@ -42,12 +42,12 @@ def get_embedding_service():
                     api_key=api_key,
                     api_version=api_version
                 )
-                logger.info("✅ Embedding service initialized")
+                logger.info("[OK] Embedding service initialized")
             else:
-                logger.warning("⚠️ Missing Azure OpenAI config for embeddings")
+                logger.warning("[WARN] Missing Azure OpenAI config for embeddings")
                 
         except Exception as e:
-            logger.error(f"❌ Failed to initialize embedding service: {e}")
+            logger.error(f"[ERROR] Failed to initialize embedding service: {e}")
     
     return _embedding_service
 
@@ -65,7 +65,7 @@ def get_cosmos_container():
             partition_key = os.getenv("COSMOS_PARTITION_KEY", "/pk")
             
             if not endpoint or not key:
-                logger.warning("⚠️ COSMOS_ENDPOINT and COSMOS_KEY not set")
+                logger.warning("[WARN] COSMOS_ENDPOINT and COSMOS_KEY not set")
                 return None
             
             _cosmos_client = CosmosClient(endpoint, key)
@@ -83,10 +83,10 @@ def get_cosmos_container():
                 }
             )
             
-            logger.info(f"✅ Connected to Cosmos DB: {db_name}/{container_name}")
+            logger.info(f"[OK] Connected to Cosmos DB: {db_name}/{container_name}")
             
         except Exception as e:
-            logger.error(f"❌ Failed to connect to Cosmos DB: {e}")
+            logger.error(f"[ERROR] Failed to connect to Cosmos DB: {e}")
             return None
     
     return _container
@@ -168,7 +168,7 @@ def upsert_snippet(snippet: Dict[str, Any], embedding: List[float] = None) -> st
         container = get_cosmos_container()
         
         if container is None:
-            logger.warning("⚠️ Cosmos DB not available, skipping upsert")
+            logger.warning("[WARN] Cosmos DB not available, skipping upsert")
             return ""
         
         # Generate ID if not provided
@@ -195,11 +195,11 @@ def upsert_snippet(snippet: Dict[str, Any], embedding: List[float] = None) -> st
         # Upsert to Cosmos DB
         container.upsert_item(document)
         
-        logger.info(f"✅ Upserted snippet: {doc_id}")
+        logger.info(f"[OK] Upserted snippet: {doc_id}")
         return doc_id
         
     except Exception as e:
-        logger.error(f"❌ Failed to upsert snippet: {e}")
+        logger.error(f"[ERROR] Failed to upsert snippet: {e}")
         return ""
 
 
@@ -214,7 +214,7 @@ def ingest_snippets(snippets: List[Dict[str, Any]]) -> List[str]:
         List of document IDs for ingested snippets
     """
     try:
-        logger.info(f"📥 Ingesting {len(snippets)} snippets")
+        logger.info(f"[START] Ingesting {len(snippets)} snippets")
         
         # Generate embeddings for all contents
         contents = [s.get("content", "") for s in snippets]
@@ -228,11 +228,11 @@ def ingest_snippets(snippets: List[Dict[str, Any]]) -> List[str]:
             if doc_id:
                 doc_ids.append(doc_id)
         
-        logger.info(f"✅ Successfully ingested {len(doc_ids)} snippets")
+        logger.info(f"[OK] Successfully ingested {len(doc_ids)} snippets")
         return doc_ids
         
     except Exception as e:
-        logger.error(f"❌ Ingestion failed: {e}")
+        logger.error(f"[ERROR] Ingestion failed: {e}")
         return []
 
 
@@ -298,6 +298,6 @@ def ingest_knowledge_base():
 
 if __name__ == "__main__":
     # Run knowledge base ingestion
-    print("🚀 Starting knowledge base ingestion...")
+    print("[START] Starting knowledge base ingestion...")
     doc_ids = ingest_knowledge_base()
-    print(f"✅ Ingested {len(doc_ids)} documents")
+    print(f"[OK] Ingested {len(doc_ids)} documents")

@@ -48,7 +48,7 @@ class FxTools:
             
             data = response.json()
             
-            logger.info(f"✅ Currency conversion successful: {data.get('rates', {})}")
+            logger.info(f"[OK] Currency conversion successful: {data.get('rates', {})}")
             
             return {
                 "amount": data.get("amount", amount),
@@ -58,13 +58,13 @@ class FxTools:
             }
             
         except requests.exceptions.Timeout:
-            logger.error("❌ Currency API timeout")
+            logger.error("[ERROR] Currency API timeout")
             raise Exception("Currency API timeout - please try again")
         except requests.exceptions.HTTPError as e:
-            logger.error(f"❌ Currency API HTTP error: {e}")
+            logger.error(f"[ERROR] Currency API HTTP error: {e}")
             raise Exception(f"Currency API error: {e}")
         except Exception as e:
-            logger.error(f"❌ Currency API error: {e}")
+            logger.error(f"[ERROR] Currency API error: {e}")
             raise Exception(f"Failed to convert currency: {e}")
     
     @kernel_function(name="get_exchange_rate", description="Get exchange rate between two currencies")
@@ -87,7 +87,7 @@ class FxTools:
                 "to": target.upper()
             }
             
-            logger.info(f"📊 Getting exchange rate: {base} → {target}")
+            logger.info(f"[STATS] Getting exchange rate: {base} → {target}")
             
             response = requests.get(url, params=params, timeout=10)
             response.raise_for_status()
@@ -95,7 +95,7 @@ class FxTools:
             data = response.json()
             rate = data.get("rates", {}).get(target.upper(), 0)
             
-            logger.info(f"✅ Exchange rate: 1 {base} = {rate} {target}")
+            logger.info(f"[OK] Exchange rate: 1 {base} = {rate} {target}")
             
             return {
                 "base": base.upper(),
@@ -105,5 +105,5 @@ class FxTools:
             }
             
         except Exception as e:
-            logger.error(f"❌ Error getting exchange rate: {e}")
+            logger.error(f"[ERROR] Error getting exchange rate: {e}")
             raise

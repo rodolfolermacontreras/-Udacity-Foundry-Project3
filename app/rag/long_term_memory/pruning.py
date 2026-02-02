@@ -29,7 +29,7 @@ def prune_by_importance(container: Any, importance_threshold: float) -> int:
                 logger.warning(f"Failed to delete memory {item['id']}: {e}")
         return count
     except Exception as e:
-        logger.error(f"❌ Failed to prune by importance: {e}")
+        logger.error(f"[ERROR] Failed to prune by importance: {e}")
         return 0
 
 
@@ -56,7 +56,7 @@ def prune_by_age(container: Any, days: int = 30) -> int:
                 logger.warning(f"Failed to delete memory {item['id']}: {e}")
         return count
     except Exception as e:
-        logger.error(f"❌ Failed to prune by age: {e}")
+        logger.error(f"[ERROR] Failed to prune by age: {e}")
         return 0
 
 
@@ -82,7 +82,7 @@ def prune_by_access_frequency(container: Any, min_accesses: int = 2) -> int:
                 logger.warning(f"Failed to delete memory {item['id']}: {e}")
         return count
     except Exception as e:
-        logger.error(f"❌ Failed to prune by access frequency: {e}")
+        logger.error(f"[ERROR] Failed to prune by access frequency: {e}")
         return 0
 
 
@@ -128,5 +128,6 @@ def prune_hybrid(container: Any, max_memories: int) -> int:
                 logger.warning(f"Failed to delete memory {mem['id']}: {e}")
         return count
     except Exception as e:
-        logger.error(f"❌ Failed to prune hybrid: {e}")
+        logger.error(f"[ERROR] Failed to prune hybrid: {e}")
         return 0
+

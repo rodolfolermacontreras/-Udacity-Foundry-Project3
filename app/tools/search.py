@@ -248,3 +248,4 @@ class SearchTools:
             ]
         
         return results[:max_results]
+

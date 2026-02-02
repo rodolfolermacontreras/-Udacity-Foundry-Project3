@@ -47,7 +47,7 @@ class WeatherTools:
             
             data = response.json()
             
-            logger.info(f"✅ Weather data retrieved successfully")
+            logger.info(f"[OK] Weather data retrieved successfully")
             
             return {
                 "latitude": data.get("latitude", lat),
@@ -58,13 +58,13 @@ class WeatherTools:
             }
             
         except requests.exceptions.Timeout:
-            logger.error("❌ Weather API timeout")
+            logger.error("[ERROR] Weather API timeout")
             raise Exception("Weather API timeout - please try again")
         except requests.exceptions.HTTPError as e:
-            logger.error(f"❌ Weather API HTTP error: {e}")
+            logger.error(f"[ERROR] Weather API HTTP error: {e}")
             raise Exception(f"Weather API error: {e}")
         except Exception as e:
-            logger.error(f"❌ Weather API error: {e}")
+            logger.error(f"[ERROR] Weather API error: {e}")
             raise Exception(f"Failed to get weather data: {e}")
     
     @kernel_function(name="get_weather_for_city", description="Get weather forecast for a city by name")
@@ -84,7 +84,7 @@ class WeatherTools:
             geocode_url = "https://geocoding-api.open-meteo.com/v1/search"
             geocode_params = {"name": city, "count": 1}
             
-            logger.info(f"📍 Geocoding city: {city}")
+            logger.info(f"[DEST] Geocoding city: {city}")
             
             geocode_response = requests.get(geocode_url, params=geocode_params, timeout=10)
             geocode_response.raise_for_status()
@@ -97,7 +97,7 @@ class WeatherTools:
             lat = result["latitude"]
             lon = result["longitude"]
             
-            logger.info(f"✅ Found {city} at ({lat}, {lon})")
+            logger.info(f"[OK] Found {city} at ({lat}, {lon})")
             
             # Get weather for the coordinates
             weather_data = self.get_weather(lat, lon)
@@ -109,5 +109,5 @@ class WeatherTools:
             return weather_data
             
         except Exception as e:
-            logger.error(f"❌ Error getting weather for city {city}: {e}")
+            logger.error(f"[ERROR] Error getting weather for city {city}: {e}")
             raise

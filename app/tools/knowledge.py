@@ -102,16 +102,16 @@ class KnowledgeTools:
             try:
                 results = retrieve(query, k=3)
                 if results and not any('error' in r for r in results):
-                    logger.info(f"✅ Retrieved {len(results)} results from knowledge base")
+                    logger.info(f"[OK] Retrieved {len(results)} results from knowledge base")
                     return self._format_rag_results(results, mcc, country)
             except Exception as e:
-                logger.warning(f"⚠️ RAG retrieval failed, using local knowledge: {e}")
+                logger.warning(f"[WARN] RAG retrieval failed, using local knowledge: {e}")
             
             # Fallback to local knowledge base
             return self._get_local_recommendation(mcc, country)
             
         except Exception as e:
-            logger.error(f"❌ Error getting card recommendation: {e}")
+            logger.error(f"[ERROR] Error getting card recommendation: {e}")
             return {
                 "card": "BankGold",
                 "benefit": "General rewards on all purchases",
@@ -130,7 +130,7 @@ class KnowledgeTools:
             Dictionary with search results and sources
         """
         try:
-            logger.info(f"🔍 Searching knowledge base: {query}")
+            logger.info(f"[SEARCH] Searching knowledge base: {query}")
             
             # Try RAG retrieval first
             try:
@@ -142,13 +142,13 @@ class KnowledgeTools:
                         "source": "RAG knowledge base"
                     }
             except Exception as e:
-                logger.warning(f"⚠️ RAG search failed: {e}")
+                logger.warning(f"[WARN] RAG search failed: {e}")
             
             # Fallback to local knowledge search
             return self._search_local_knowledge(query)
             
         except Exception as e:
-            logger.error(f"❌ Knowledge search error: {e}")
+            logger.error(f"[ERROR] Knowledge search error: {e}")
             return {"error": str(e)}
     
     @kernel_function(name="get_lounge_rules", description="Get airport lounge access rules")
@@ -184,7 +184,7 @@ class KnowledgeTools:
             }
             
         except Exception as e:
-            logger.error(f"❌ Error getting lounge rules: {e}")
+            logger.error(f"[ERROR] Error getting lounge rules: {e}")
             return {"error": str(e)}
     
     @kernel_function(name="get_travel_insurance", description="Get travel insurance details for a card")
@@ -220,7 +220,7 @@ class KnowledgeTools:
             }
             
         except Exception as e:
-            logger.error(f"❌ Error getting travel insurance: {e}")
+            logger.error(f"[ERROR] Error getting travel insurance: {e}")
             return {"error": str(e)}
     
     def _mcc_to_category(self, mcc: str) -> str:

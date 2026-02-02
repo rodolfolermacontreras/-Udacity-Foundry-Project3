@@ -73,12 +73,12 @@ def synthesize_to_tripplan(tool_results: Dict[str, Any], requirements: Dict[str,
             "plan": trip_plan.model_dump()
         }
         
-        logger.info("✅ TripPlan synthesized successfully")
+        logger.info("[OK] TripPlan synthesized successfully")
         
         return json.dumps(result, indent=2)
         
     except Exception as e:
-        logger.error(f"❌ Error synthesizing TripPlan: {e}")
+        logger.error(f"[ERROR] Error synthesizing TripPlan: {e}")
         return json.dumps({"error": str(e)})
 
 
@@ -113,7 +113,7 @@ def extract_weather(weather_data: Dict[str, Any]) -> Optional[Weather]:
         )
         
     except Exception as e:
-        logger.warning(f"⚠️ Error extracting weather: {e}")
+        logger.warning(f"[WARN] Error extracting weather: {e}")
         return None
 
 
@@ -204,7 +204,7 @@ def extract_search_results(search_data: List[Dict[str, Any]]) -> Optional[List[S
         return results if results else None
         
     except Exception as e:
-        logger.warning(f"⚠️ Error extracting search results: {e}")
+        logger.warning(f"[WARN] Error extracting search results: {e}")
         return None
 
 
@@ -243,7 +243,7 @@ def extract_card_recommendation(
         )
         
     except Exception as e:
-        logger.warning(f"⚠️ Error extracting card recommendation: {e}")
+        logger.warning(f"[WARN] Error extracting card recommendation: {e}")
         return CardRecommendation(
             card=card_name,
             benefit="Standard rewards",
@@ -287,7 +287,7 @@ def extract_currency_info(fx_data: Dict[str, Any], card_recommendation: CardReco
         )
         
     except Exception as e:
-        logger.warning(f"⚠️ Error extracting currency info: {e}")
+        logger.warning(f"[WARN] Error extracting currency info: {e}")
         return CurrencyInfo(
             sample_meal_usd=100.0,
             points_earned=100
@@ -321,7 +321,7 @@ def extract_citations(tool_results: Dict[str, Any]) -> List[str]:
                 citations.add(source)
         
     except Exception as e:
-        logger.warning(f"⚠️ Error extracting citations: {e}")
+        logger.warning(f"[WARN] Error extracting citations: {e}")
     
     return list(citations)
 
@@ -367,7 +367,7 @@ def format_trip_plan_display(trip_plan_json: str) -> str:
         lines.append("=" * 60)
         lines.append("🎯 TRAVEL PLAN")
         lines.append("=" * 60)
-        lines.append(f"📍 Destination: {plan.get('destination', 'N/A')}")
+        lines.append(f"[DEST] Destination: {plan.get('destination', 'N/A')}")
         lines.append(f"📅 Travel Dates: {plan.get('travel_dates', 'N/A')}")
         lines.append("")
         

@@ -40,7 +40,7 @@ def get_cosmos_client(database_name: str = "agent_memory",
             partition_key=PartitionKey(path=partition_key),
         )
 
-        logger.info(f"✅ Connected to Cosmos DB: {database_name}/{container_name}")
+        logger.info(f"[OK] Connected to Cosmos DB: {database_name}/{container_name}")
 
     return _client
 
@@ -54,3 +54,4 @@ def get_container():
     if _container is None:
         raise RuntimeError("Cosmos DB container not initialized. Call get_cosmos_client() first.")
     return _container
+

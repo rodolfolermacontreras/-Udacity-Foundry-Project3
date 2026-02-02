@@ -41,3 +41,4 @@ class TripPlan(BaseModel):
     currency_info: CurrencyInfo
     citations: Optional[List[str]] = None
     next_steps: List[str]
+

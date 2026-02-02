@@ -209,7 +209,7 @@ def create_kernel() -> Kernel:
             api_version=api_version
         )
         kernel.add_service(chat_service)
-        logger.info(f"✅ Added AzureChatCompletion: {chat_deployment}")
+        logger.info(f"[OK] Added AzureChatCompletion: {chat_deployment}")
         
         # Add Azure Text Embedding service
         embedding_service = AzureTextEmbedding(
@@ -219,9 +219,9 @@ def create_kernel() -> Kernel:
             api_version=api_version
         )
         kernel.add_service(embedding_service)
-        logger.info(f"✅ Added AzureTextEmbedding: {embed_deployment}")
+        logger.info(f"[OK] Added AzureTextEmbedding: {embed_deployment}")
     else:
-        logger.warning("⚠️ Azure OpenAI credentials not found")
+        logger.warning("[WARN] Azure OpenAI credentials not found")
     
     # Add tool plugins
     kernel.add_plugin(WeatherTools(), plugin_name="WeatherTools")
@@ -230,14 +230,14 @@ def create_kernel() -> Kernel:
     kernel.add_plugin(CardTools(), plugin_name="CardTools")
     kernel.add_plugin(KnowledgeTools(), plugin_name="KnowledgeTools")
     
-    logger.info("✅ Registered all tool plugins")
+    logger.info("[OK] Registered all tool plugins")
     
     # Set up filters for logging and telemetry
     try:
         setup_kernel_filters(kernel)
-        logger.info("✅ Set up kernel filters")
+        logger.info("[OK] Set up kernel filters")
     except Exception as e:
-        logger.warning(f"⚠️ Could not set up filters: {e}")
+        logger.warning(f"[WARN] Could not set up filters: {e}")
     
     return kernel
 
@@ -306,9 +306,9 @@ async def execute_tools(kernel: Kernel, state: AgentState, requirements: dict) -
         weather_data = weather_tool.get_weather(lat, lon)
         tool_results["weather"] = weather_data
         state.add_tool_call("weather", weather_data)
-        logger.info(f"✅ Weather data retrieved for {destination}")
+        logger.info(f"[OK] Weather data retrieved for {destination}")
     except Exception as e:
-        logger.warning(f"⚠️ Weather tool error: {e}")
+        logger.warning(f"[WARN] Weather tool error: {e}")
         state.add_tool_call("weather", error=str(e))
     
     # 2. Get currency exchange
@@ -318,9 +318,9 @@ async def execute_tools(kernel: Kernel, state: AgentState, requirements: dict) -
         fx_data = fx_tool.convert_fx(100.0, "USD", target_currency)
         tool_results["fx"] = fx_data
         state.add_tool_call("fx", fx_data)
-        logger.info(f"✅ FX data retrieved: USD to {target_currency}")
+        logger.info(f"[OK] FX data retrieved: USD to {target_currency}")
     except Exception as e:
-        logger.warning(f"⚠️ FX tool error: {e}")
+        logger.warning(f"[WARN] FX tool error: {e}")
         state.add_tool_call("fx", error=str(e))
     
     # 3. Search for restaurants/attractions
@@ -329,9 +329,9 @@ async def execute_tools(kernel: Kernel, state: AgentState, requirements: dict) -
         search_results = search_tool.web_search(f"best restaurants in {destination}", 5)
         tool_results["search"] = search_results
         state.add_tool_call("search", search_results)
-        logger.info(f"✅ Search results retrieved for {destination}")
+        logger.info(f"[OK] Search results retrieved for {destination}")
     except Exception as e:
-        logger.warning(f"⚠️ Search tool error: {e}")
+        logger.warning(f"[WARN] Search tool error: {e}")
         state.add_tool_call("search", error=str(e))
     
     # 4. Get card recommendation
@@ -340,9 +340,9 @@ async def execute_tools(kernel: Kernel, state: AgentState, requirements: dict) -
         card_data = card_tool.recommend_card("5812", 100.0, destination)  # 5812 = restaurants
         tool_results["card"] = card_data
         state.add_tool_call("card", card_data)
-        logger.info(f"✅ Card recommendation retrieved")
+        logger.info(f"[OK] Card recommendation retrieved")
     except Exception as e:
-        logger.warning(f"⚠️ Card tool error: {e}")
+        logger.warning(f"[WARN] Card tool error: {e}")
         state.add_tool_call("card", error=str(e))
     
     # 5. Get knowledge base info
@@ -351,9 +351,9 @@ async def execute_tools(kernel: Kernel, state: AgentState, requirements: dict) -
         knowledge_data = knowledge_tool.get_card_recommendation("5812", destination)
         tool_results["knowledge"] = knowledge_data
         state.add_tool_call("knowledge", knowledge_data)
-        logger.info(f"✅ Knowledge base info retrieved")
+        logger.info(f"[OK] Knowledge base info retrieved")
     except Exception as e:
-        logger.warning(f"⚠️ Knowledge tool error: {e}")
+        logger.warning(f"[WARN] Knowledge tool error: {e}")
         state.add_tool_call("knowledge", error=str(e))
     
     return tool_results
@@ -372,19 +372,19 @@ async def run_request(user_input: str) -> str:
     """
     try:
         logger.info("=" * 60)
-        logger.info(f"🚀 Processing request: {user_input[:50]}...")
+        logger.info(f"[START] Processing request: {user_input[:50]}...")
         
         # Initialize state
         state = AgentState()
         memory = ShortTermMemory()
         
         # Phase 1: Init
-        logger.info(f"📍 Phase: {state.phase.value} - {state.get_phase_description()}")
+        logger.info(f"[PHASE] Phase: {state.phase.value} - {state.get_phase_description()}")
         memory.add_conversation("user", user_input)
         
         # Phase 2: ClarifyRequirements
         state.advance()
-        logger.info(f"📍 Phase: {state.phase.value} - {state.get_phase_description()}")
+        logger.info(f"[PHASE] Phase: {state.phase.value} - {state.get_phase_description()}")
         
         requirements = extract_requirements_from_input(user_input)
         state.set_requirements(requirements)
@@ -393,24 +393,24 @@ async def run_request(user_input: str) -> str:
             # Need clarification
             state.add_clarification_question("What destination are you planning to visit?")
             requirements["destination"] = "Paris"  # Default for demo
-            logger.info("⚠️ No destination found, defaulting to Paris")
+            logger.info("[WARN] No destination found, defaulting to Paris")
         
         # Phase 3: PlanTools
         state.advance()
-        logger.info(f"📍 Phase: {state.phase.value} - {state.get_phase_description()}")
+        logger.info(f"[PHASE] Phase: {state.phase.value} - {state.get_phase_description()}")
         
         # Create kernel
         kernel = create_kernel()
         
         # Phase 4: ExecuteTools
         state.advance()
-        logger.info(f"📍 Phase: {state.phase.value} - {state.get_phase_description()}")
+        logger.info(f"[PHASE] Phase: {state.phase.value} - {state.get_phase_description()}")
         
         tool_results = await execute_tools(kernel, state, requirements)
         
         # Phase 5: AnalyzeResults
         state.advance()
-        logger.info(f"📍 Phase: {state.phase.value} - {state.get_phase_description()}")
+        logger.info(f"[PHASE] Phase: {state.phase.value} - {state.get_phase_description()}")
         
         analysis = {
             "tools_executed": len(state.tools_called),
@@ -421,7 +421,7 @@ async def run_request(user_input: str) -> str:
         
         # Phase 6: ResolveIssues
         state.advance()
-        logger.info(f"📍 Phase: {state.phase.value} - {state.get_phase_description()}")
+        logger.info(f"[PHASE] Phase: {state.phase.value} - {state.get_phase_description()}")
         
         if state.tool_errors:
             for tool, error in state.tool_errors.items():
@@ -431,7 +431,7 @@ async def run_request(user_input: str) -> str:
         
         # Phase 7: ProduceStructuredOutput
         state.advance()
-        logger.info(f"📍 Phase: {state.phase.value} - {state.get_phase_description()}")
+        logger.info(f"[PHASE] Phase: {state.phase.value} - {state.get_phase_description()}")
         
         # Synthesize results into TripPlan
         result = synthesize_to_tripplan(tool_results, requirements)
@@ -446,18 +446,18 @@ async def run_request(user_input: str) -> str:
         
         # Phase 8: Done
         state.advance()
-        logger.info(f"📍 Phase: {state.phase.value} - {state.get_phase_description()}")
+        logger.info(f"[PHASE] Phase: {state.phase.value} - {state.get_phase_description()}")
         
         # Add response to memory
         memory.add_conversation("assistant", result)
         
-        logger.info("✅ Request processed successfully")
-        logger.info(f"📊 State Summary: {state.get_status_summary()}")
+        logger.info("[OK] Request processed successfully")
+        logger.info(f"[SUMMARY] State Summary: {state.get_status_summary()}")
         
         return result
         
     except Exception as e:
-        logger.error(f"❌ Error in run_request: {e}")
+        logger.error(f"[ERROR] Error in run_request: {e}")
         import traceback
         traceback.print_exc()
         return json.dumps({"error": str(e)})
@@ -466,14 +466,14 @@ async def run_request(user_input: str) -> str:
 def main():
     """Main entry point for command line usage."""
     try:
-        logger.info("🚀 Starting Travel Concierge Agent")
+        logger.info("[START] Starting Travel Concierge Agent")
         
         # Validate configuration
         try:
             config = validate_all_config()
-            logger.info("✅ Configuration validated successfully")
+            logger.info("[OK] Configuration validated successfully")
         except Exception as e:
-            logger.warning(f"⚠️ Configuration warning: {e}")
+            logger.warning(f"[WARN] Configuration warning: {e}")
         
         # Example usage
         user_input = "I want to go to Paris from 2026-06-01 to 2026-06-08 with my BankGold card"
@@ -493,7 +493,7 @@ def main():
             print(result)
         
     except Exception as e:
-        logger.error(f"❌ Error in main: {e}")
+        logger.error(f"[ERROR] Error in main: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

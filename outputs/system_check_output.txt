@@ -1,0 +1,86 @@
+Travel Concierge Agent - System Health Check
+============================================================
+Timestamp: 2026-02-02 11:14:41
+
+
+[RUNNING] Environment Variables...
+
+[CHECK] Environment Variables
+----------------------------------------
+[OK] AZURE_OPENAI_ENDPOINT
+[OK] AZURE_OPENAI_API_VERSION
+[OK] AZURE_OPENAI_CHAT_DEPLOYMENT
+[OK] AZURE_OPENAI_EMBED_DEPLOYMENT
+[OK] AZURE_OPENAI_KEY
+[OK] COSMOS_ENDPOINT
+[OK] COSMOS_KEY
+[OK] COSMOS_DB
+[OK] COSMOS_CONTAINER
+[OK] COSMOS_PARTITION_KEY
+
+[RUNNING] Azure OpenAI...
+
+[CHECK] Azure OpenAI Service
+----------------------------------------
+[OK] Chat: pong
+[OK] Embedding: 1536 dimensions
+
+[RUNNING] Cosmos DB...
+
+[CHECK] Cosmos DB Service
+----------------------------------------
+[OK] Cosmos DB connected (found 1 item(s))
+
+[RUNNING] Tools...
+
+[CHECK] Tool Integration
+----------------------------------------
+[OK] Weather: N/AC
+[OK] FX: 100 USD = 84.46 EUR
+[OK] Card: N/A
+[OK] Knowledge: Found 5 results
+[OK] Search: 1 result(s)
+[OK] All tools working
+
+[RUNNING] Grounding Search...
+
+[CHECK] Azure Grounding Search
+----------------------------------------
+Querying Agent for: "best restaurants in Tokyo 2025"
+[OK] Received 1 result(s):
+
+1. Web search: best restaurants in Tokyo 2025
+   URL: https://bing.com
+   Tokyo's culinary scene in 2025 offers a wealth of exceptional dining experiences...
+
+
+[RUNNING] State Management...
+
+[CHECK] State Management
+----------------------------------------
+[OK] State management: Working
+
+[RUNNING] Memory Systems...
+
+[CHECK] Memory Systems
+----------------------------------------
+[OK] Short and long-term memory: Working
+
+[RUNNING] Knowledge Base...
+
+[CHECK] Knowledge Base
+----------------------------------------
+[OK] Knowledge base: Found 1 BankGold dining benefits
+
+Health Check Summary
+============================================================
+[PASS] Environment Variables
+[PASS] Azure OpenAI
+[PASS] Cosmos DB
+[PASS] Tools
+[PASS] Grounding Search
+[PASS] State Management
+[PASS] Memory Systems
+[PASS] Knowledge Base
+
+Overall: 8/8 checks passed

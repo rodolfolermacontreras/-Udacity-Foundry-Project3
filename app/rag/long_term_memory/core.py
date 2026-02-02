@@ -83,7 +83,7 @@ class LongTermMemory:
             embedding=embedding,
         )
         # TODO: Add memory to Cosmos DB
-        logger.info(f"✅ Added memory {memory_id} (importance={importance_score})")
+        logger.info(f"[OK] Added memory {memory_id} (importance={importance_score})")
 
         self._check_and_prune_if_needed()
         return memory_id
@@ -98,7 +98,7 @@ class LongTermMemory:
             self._container.upsert_item(mem.to_dict())
             return mem
         except Exception as e:
-            logger.error(f"❌ Failed to get memory {memory_id}: {e}")
+            logger.error(f"[ERROR] Failed to get memory {memory_id}: {e}")
             return None
 
     def get_memory_statistics(self, session_id: str = None) -> Dict[str, Any]:
@@ -151,7 +151,7 @@ class LongTermMemory:
                 "newest_memory": max(created_dates).isoformat() if created_dates else None,
             }
         except Exception as e:
-            logger.error(f"❌ Failed to calculate memory statistics: {e}")
+            logger.error(f"[ERROR] Failed to calculate memory statistics: {e}")
             return {}
 
     
@@ -192,7 +192,7 @@ class LongTermMemory:
             memories.sort(key=lambda m: (m.importance_score, m.last_accessed), reverse=True)
             return memories[:limit]
         except Exception as e:
-            logger.error(f"❌ Search failed: {e}")
+            logger.error(f"[ERROR] Search failed: {e}")
             return []
 
     def update_memory_importance(self, memory_id: str, session_id: str, new_importance: float) -> bool:
@@ -217,7 +217,7 @@ class LongTermMemory:
             if count > self.max_memories:
                 self.prune_memories("hybrid")
         except Exception as e:
-            logger.error(f"❌ Check/prune failed: {e}")
+            logger.error(f"[ERROR] Check/prune failed: {e}")
 
     def prune_memories(self, strategy: str = "hybrid") -> int:
         """Run a specific pruning strategy."""
@@ -263,3 +263,4 @@ class LongTermMemory:
             self._container, self.max_memories
         )
         return results
+

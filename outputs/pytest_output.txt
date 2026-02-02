@@ -1,0 +1,140 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.0.0, pluggy-1.6.0 -- C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3
+configfile: pytest.ini
+plugins: anyio-4.12.1, mock-3.12.0
+collecting ... collected 76 items
+
+tests/test_memory.py::TestShortTermMemory::test_initialization PASSED    [  1%]
+tests/test_memory.py::TestShortTermMemory::test_initialization_custom_params PASSED [  2%]
+tests/test_memory.py::TestShortTermMemory::test_add_conversation PASSED  [  3%]
+tests/test_memory.py::TestShortTermMemory::test_add_conversation_with_metadata PASSED [  5%]
+tests/test_memory.py::TestShortTermMemory::test_add_tool_call PASSED     [  6%]
+tests/test_memory.py::TestShortTermMemory::test_add_system_event PASSED  [  7%]
+tests/test_memory.py::TestShortTermMemory::test_memory_eviction_by_items PASSED [  9%]
+tests/test_memory.py::TestShortTermMemory::test_memory_eviction_by_tokens PASSED [ 10%]
+tests/test_memory.py::TestShortTermMemory::test_get_conversation_history PASSED [ 11%]
+tests/test_memory.py::TestShortTermMemory::test_get_recent_conversation PASSED [ 13%]
+tests/test_memory.py::TestShortTermMemory::test_get_memory_summary PASSED [ 14%]
+tests/test_memory.py::TestShortTermMemory::test_search_memory PASSED     [ 15%]
+tests/test_memory.py::TestShortTermMemory::test_clear_memory PASSED      [ 17%]
+tests/test_memory.py::TestShortTermMemory::test_export_import_memory PASSED [ 18%]
+tests/test_memory.py::TestShortTermMemory::test_get_context_window PASSED [ 19%]
+tests/test_memory.py::TestShortTermMemory::test_get_context_window_with_limit PASSED [ 21%]
+tests/test_memory.py::TestShortTermMemory::test_string_representations PASSED [ 22%]
+tests/test_memory.py::TestShortTermMemory::test_token_estimation PASSED  [ 23%]
+tests/test_memory.py::TestShortTermMemory::test_memory_limits_edge_cases PASSED [ 25%]
+tests/test_memory.py::TestShortTermMemory::test_conversation_flow_simulation PASSED [ 26%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_short_term_memory_basic_operations PASSED [ 27%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_short_term_memory_eviction PASSED [ 28%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_memory_item_creation_and_serialization PASSED [ 30%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_importance_scoring_algorithm PASSED [ 31%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_tag_extraction_algorithm PASSED [ 32%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_memory_eviction_logic PASSED [ 34%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_hybrid_scoring_algorithm PASSED [ 35%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_memory_reordering_strategies PASSED [ 36%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_memory_statistics_calculation PASSED [ 38%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_memory_limits_enforcement PASSED [ 39%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_memory_search_functionality PASSED [ 40%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_memory_context_window_generation PASSED [ 42%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_memory_export_import PASSED [ 43%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_memory_error_handling PASSED [ 44%]
+tests/test_memory_integration.py::TestMemoryIntegration::test_memory_performance_characteristics PASSED [ 46%]
+tests/test_models.py::TestWeather::test_valid_weather PASSED             [ 47%]
+tests/test_models.py::TestWeather::test_invalid_weather_types PASSED     [ 48%]
+tests/test_models.py::TestCardRecommendation::test_valid_card_recommendation_required_only PASSED [ 50%]
+tests/test_models.py::TestCardRecommendation::test_valid_card_recommendation_all_fields PASSED [ 51%]
+tests/test_models.py::TestCurrencyInfo::test_valid_currency_info_required_only PASSED [ 52%]
+tests/test_models.py::TestCurrencyInfo::test_valid_currency_info_all_fields PASSED [ 53%]
+tests/test_models.py::TestTripPlan::test_valid_trip_plan_minimal PASSED  [ 55%]
+tests/test_models.py::TestTripPlan::test_valid_trip_plan_complete PASSED [ 56%]
+tests/test_models.py::TestTripPlan::test_invalid_trip_plan_missing_required PASSED [ 57%]
+tests/test_state.py::TestAgentState::test_initial_state PASSED           [ 59%]
+tests/test_state.py::TestAgentState::test_state_advancement PASSED       [ 60%]
+tests/test_state.py::TestAgentState::test_state_data_assignment PASSED   [ 61%]
+tests/test_state.py::TestAgentState::test_tools_called_tracking PASSED   [ 63%]
+tests/test_state.py::TestAgentState::test_state_reset PASSED             [ 64%]
+tests/test_state.py::TestAgentState::test_phase_enum_values PASSED       [ 65%]
+tests/test_state.py::TestEnhancedAgentState::test_initial_state_enhanced PASSED [ 67%]
+tests/test_state.py::TestEnhancedAgentState::test_requirements_management PASSED [ 68%]
+tests/test_state.py::TestEnhancedAgentState::test_clarification_questions PASSED [ 69%]
+tests/test_state.py::TestEnhancedAgentState::test_requirement_clarification PASSED [ 71%]
+tests/test_state.py::TestEnhancedAgentState::test_tool_call_tracking PASSED [ 72%]
+tests/test_state.py::TestEnhancedAgentState::test_analysis_results PASSED [ 73%]
+tests/test_state.py::TestEnhancedAgentState::test_issue_management PASSED [ 75%]
+tests/test_state.py::TestEnhancedAgentState::test_structured_output PASSED [ 76%]
+tests/test_state.py::TestEnhancedAgentState::test_phase_descriptions PASSED [ 77%]
+tests/test_state.py::TestEnhancedAgentState::test_status_summary PASSED  [ 78%]
+tests/test_state.py::TestEnhancedAgentState::test_state_completion_checks PASSED [ 80%]
+tests/test_state.py::TestEnhancedAgentState::test_enhanced_state_advancement PASSED [ 81%]
+tests/test_state.py::TestEnhancedAgentState::test_state_reset_enhanced PASSED [ 82%]
+tests/test_state.py::TestEnhancedAgentState::test_data_completeness_edge_cases PASSED [ 84%]
+tests/test_state.py::TestEnhancedAgentState::test_tool_error_handling PASSED [ 85%]
+tests/test_state.py::TestEnhancedAgentState::test_citation_management PASSED [ 86%]
+tests/test_tools.py::TestWeatherTool::test_get_weather_success PASSED    [ 88%]
+tests/test_tools.py::TestWeatherTool::test_get_weather_api_error PASSED  [ 89%]
+tests/test_tools.py::TestFxTool::test_convert_fx_success PASSED          [ 90%]
+tests/test_tools.py::TestFxTool::test_convert_fx_api_error PASSED        [ 92%]
+tests/test_tools.py::TestSearchTool::test_web_search_success_mock_results PASSED [ 93%]
+tests/test_tools.py::TestSearchTool::test_web_search_missing_config PASSED [ 94%]
+tests/test_tools.py::TestSearchTool::test_web_search_api_error PASSED    [ 96%]
+tests/test_tools.py::TestCardTool::test_recommend_card_success PASSED    [ 97%]
+tests/test_tools.py::TestCardTool::test_recommend_card_different_countries PASSED [ 98%]
+tests/test_tools.py::TestCardTool::test_recommend_card_different_mccs PASSED [100%]
+
+============================== warnings summary ===============================
+tests/test_memory.py: 21 warnings
+tests/test_memory_integration.py: 10 warnings
+  C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\memory.py:38: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    self.created_at: datetime = datetime.utcnow()
+
+tests/test_memory.py: 54 warnings
+tests/test_memory_integration.py: 119 warnings
+  C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\memory.py:85: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    'timestamp': datetime.utcnow().isoformat(),
+
+tests/test_memory.py::TestShortTermMemory::test_add_tool_call
+tests/test_memory.py::TestShortTermMemory::test_search_memory
+tests/test_memory.py::TestShortTermMemory::test_export_import_memory
+tests/test_memory.py::TestShortTermMemory::test_conversation_flow_simulation
+tests/test_memory.py::TestShortTermMemory::test_conversation_flow_simulation
+tests/test_memory_integration.py::TestMemoryIntegration::test_short_term_memory_basic_operations
+tests/test_memory_integration.py::TestMemoryIntegration::test_memory_search_functionality
+tests/test_memory_integration.py::TestMemoryIntegration::test_memory_export_import
+  C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\memory.py:111: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    'timestamp': datetime.utcnow().isoformat(),
+
+tests/test_memory.py::TestShortTermMemory::test_add_system_event
+  C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\memory.py:139: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    'timestamp': datetime.utcnow().isoformat(),
+
+tests/test_memory.py::TestShortTermMemory::test_export_import_memory
+tests/test_memory_integration.py::TestMemoryIntegration::test_memory_export_import
+  C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\memory.py:271: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    self.created_at = datetime.fromisoformat(data.get('created_at', datetime.utcnow().isoformat()))
+
+tests/test_state.py: 21 warnings
+  C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\state.py:68: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    self.created_at: datetime = datetime.utcnow()
+
+tests/test_state.py: 21 warnings
+  C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\state.py:69: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    self.updated_at: datetime = datetime.utcnow()
+
+tests/test_state.py: 47 warnings
+  C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\state.py:173: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    self.updated_at = datetime.utcnow()
+
+tests/test_state.py::TestAgentState::test_state_reset
+tests/test_state.py::TestEnhancedAgentState::test_state_reset_enhanced
+  C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\state.py:131: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    self.created_at = datetime.utcnow()
+
+tests/test_state.py::TestAgentState::test_state_reset
+tests/test_state.py::TestEnhancedAgentState::test_state_reset_enhanced
+  C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\state.py:132: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    self.updated_at = datetime.utcnow()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 76 passed, 308 warnings in 7.22s =======================

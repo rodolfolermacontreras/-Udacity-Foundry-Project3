@@ -433,3 +433,4 @@ class LongTermMemory:
     
     def __repr__(self) -> str:
         return f"LongTermMemory(memories={len(self.memories)}, max={self.max_memories})"
+

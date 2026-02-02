@@ -41,12 +41,12 @@ def get_embedding_service():
                     api_key=api_key,
                     api_version=api_version
                 )
-                logger.info("✅ Embedding service initialized for retrieval")
+                logger.info("[OK] Embedding service initialized for retrieval")
             else:
-                logger.warning("⚠️ Missing Azure OpenAI config for embeddings")
+                logger.warning("[WARN] Missing Azure OpenAI config for embeddings")
                 
         except Exception as e:
-            logger.error(f"❌ Failed to initialize embedding service: {e}")
+            logger.error(f"[ERROR] Failed to initialize embedding service: {e}")
     
     return _embedding_service
 
@@ -63,17 +63,17 @@ def get_cosmos_container():
             container_name = os.getenv("COSMOS_CONTAINER", "snippets")
             
             if not endpoint or not key:
-                logger.warning("⚠️ COSMOS_ENDPOINT and COSMOS_KEY not set")
+                logger.warning("[WARN] COSMOS_ENDPOINT and COSMOS_KEY not set")
                 return None
             
             _cosmos_client = CosmosClient(endpoint, key)
             database = _cosmos_client.get_database_client(db_name)
             _container = database.get_container_client(container_name)
             
-            logger.info(f"✅ Connected to Cosmos DB for retrieval: {db_name}/{container_name}")
+            logger.info(f"[OK] Connected to Cosmos DB for retrieval: {db_name}/{container_name}")
             
         except Exception as e:
-            logger.error(f"❌ Failed to connect to Cosmos DB: {e}")
+            logger.error(f"[ERROR] Failed to connect to Cosmos DB: {e}")
             return None
     
     return _container
@@ -107,7 +107,7 @@ async def generate_query_embedding(query: str) -> List[float]:
         return []
         
     except Exception as e:
-        logger.error(f"❌ Failed to generate query embedding: {e}")
+        logger.error(f"[ERROR] Failed to generate query embedding: {e}")
         return []
 
 
@@ -168,22 +168,22 @@ def retrieve(query: str, k: int = 5) -> List[Dict[str, Any]]:
         List of relevant snippets with similarity scores
     """
     try:
-        logger.info(f"🔍 Retrieving documents for query: {query[:50]}...")
+        logger.info(f"[SEARCH] Retrieving documents for query: {query[:50]}...")
         
         container = get_cosmos_container()
         
         if container is None:
-            logger.warning("⚠️ Cosmos DB not available for retrieval")
+            logger.warning("[WARN] Cosmos DB not available for retrieval")
             return [{"error": "Database not available"}]
         
         # Generate query embedding
         query_embedding = generate_query_embedding_sync(query)
         
         if not query_embedding:
-            logger.warning("⚠️ Could not generate query embedding, using text search")
+            logger.warning("[WARN] Could not generate query embedding, using text search")
             return text_search_fallback(query, k)
         
-        logger.info(f"✅ Generated query embedding (dim={len(query_embedding)})")
+        logger.info(f"[OK] Generated query embedding (dim={len(query_embedding)})")
         
         # Try vector search with VectorDistance
         try:
@@ -207,7 +207,7 @@ def retrieve(query: str, k: int = 5) -> List[Dict[str, Any]]:
                 enable_cross_partition_query=True
             ))
             
-            logger.info(f"✅ Vector search returned {len(results)} results")
+            logger.info(f"[OK] Vector search returned {len(results)} results")
             
             return [
                 {
@@ -224,11 +224,11 @@ def retrieve(query: str, k: int = 5) -> List[Dict[str, Any]]:
             ]
             
         except Exception as e:
-            logger.warning(f"⚠️ Vector search failed, using fallback: {e}")
+            logger.warning(f"[WARN] Vector search failed, using fallback: {e}")
             return manual_vector_search(query_embedding, k)
         
     except Exception as e:
-        logger.error(f"❌ Retrieval error: {e}")
+        logger.error(f"[ERROR] Retrieval error: {e}")
         return [{"error": str(e)}]
 
 
@@ -257,7 +257,7 @@ def manual_vector_search(query_embedding: List[float], k: int = 5) -> List[Dict[
             enable_cross_partition_query=True
         ))
         
-        logger.info(f"📊 Computing similarity for {len(documents)} documents")
+        logger.info(f"[CALC] Computing similarity for {len(documents)} documents")
         
         # Calculate similarity scores
         scored_docs = []
@@ -283,11 +283,11 @@ def manual_vector_search(query_embedding: List[float], k: int = 5) -> List[Dict[
                 }
             })
         
-        logger.info(f"✅ Manual search returned {len(results)} results")
+        logger.info(f"[OK] Manual search returned {len(results)} results")
         return results
         
     except Exception as e:
-        logger.error(f"❌ Manual vector search failed: {e}")
+        logger.error(f"[ERROR] Manual vector search failed: {e}")
         return []
 
 
@@ -325,7 +325,7 @@ def text_search_fallback(query: str, k: int = 5) -> List[Dict[str, Any]]:
             enable_cross_partition_query=True
         ))
         
-        logger.info(f"✅ Text search returned {len(results)} results")
+        logger.info(f"[OK] Text search returned {len(results)} results")
         
         return [
             {
@@ -342,13 +342,13 @@ def text_search_fallback(query: str, k: int = 5) -> List[Dict[str, Any]]:
         ]
         
     except Exception as e:
-        logger.error(f"❌ Text search failed: {e}")
+        logger.error(f"[ERROR] Text search failed: {e}")
         return []
 
 
 if __name__ == "__main__":
     # Test retrieval
-    print("🔍 Testing RAG retrieval...")
+    print("[SEARCH] Testing RAG retrieval...")
     results = retrieve("BankGold dining benefits", k=3)
     for i, r in enumerate(results):
         print(f"\n{i+1}. {r.get('title', 'No title')}")

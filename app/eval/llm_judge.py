@@ -101,7 +101,7 @@ class LLMJudge:
             EvaluationResult with scores and feedback
         """
         try:
-            logger.info("⚖️ Starting LLM-as-judge evaluation")
+            logger.info("[EVAL] Starting LLM-as-judge evaluation")
             
             # Create evaluation prompt
             evaluation_prompt = self._create_evaluation_prompt(
@@ -120,11 +120,11 @@ class LLMJudge:
             evaluation_text = response[0].content.strip()
             result = self._parse_evaluation_result(evaluation_text)
             
-            logger.info(f"⚖️ Evaluation completed. Overall score: {result.overall_score:.2f}")
+            logger.info(f"[EVAL] Evaluation completed. Overall score: {result.overall_score:.2f}")
             return result
             
         except Exception as e:
-            logger.error(f"❌ LLM-as-judge evaluation failed: {e}")
+            logger.error(f"[ERROR] LLM-as-judge evaluation failed: {e}")
             return EvaluationResult(
                 overall_score=0.0,
                 criteria_scores={},
@@ -229,7 +229,7 @@ class LLMJudge:
                 return self._fallback_parse(evaluation_text)
                 
         except Exception as e:
-            logger.error(f"❌ Failed to parse evaluation result: {e}")
+            logger.error(f"[ERROR] Failed to parse evaluation result: {e}")
             return self._fallback_parse(evaluation_text)
     
     def _fallback_parse(self, evaluation_text: str) -> EvaluationResult:
@@ -270,14 +270,14 @@ class LLMJudge:
             Batch evaluation results
         """
         try:
-            logger.info(f"⚖️ Starting batch evaluation of {len(test_cases)} test cases")
+            logger.info(f"[EVAL] Starting batch evaluation of {len(test_cases)} test cases")
             
             results = []
             total_score = 0.0
             passed_count = 0
             
             for i, test_case in enumerate(test_cases):
-                logger.info(f"⚖️ Evaluating test case {i+1}/{len(test_cases)}")
+                logger.info(f"[EVAL] Evaluating test case {i+1}/{len(test_cases)}")
                 
                 result = await self.evaluate_response(
                     user_query=test_case.get('user_query', ''),
@@ -302,7 +302,7 @@ class LLMJudge:
             avg_score = total_score / len(test_cases) if test_cases else 0.0
             pass_rate = (passed_count / len(test_cases)) * 100 if test_cases else 0.0
             
-            logger.info(f"⚖️ Batch evaluation completed. Avg score: {avg_score:.2f}, Pass rate: {pass_rate:.1f}%")
+            logger.info(f"[EVAL] Batch evaluation completed. Avg score: {avg_score:.2f}, Pass rate: {pass_rate:.1f}%")
             
             return {
                 "total_cases": len(test_cases),
@@ -314,10 +314,11 @@ class LLMJudge:
             }
             
         except Exception as e:
-            logger.error(f"❌ Batch evaluation failed: {e}")
+            logger.error(f"[ERROR] Batch evaluation failed: {e}")
             return {
                 "error": str(e),
                 "total_cases": 0,
                 "average_score": 0.0,
                 "pass_rate": 0.0
             }
+

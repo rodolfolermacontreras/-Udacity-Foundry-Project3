@@ -217,3 +217,4 @@ def setup_kernel_filters(kernel: Kernel, short_term_memory=None, long_term_memor
     
     logger.info("[OK] SK filters configured successfully")
     return filters
+

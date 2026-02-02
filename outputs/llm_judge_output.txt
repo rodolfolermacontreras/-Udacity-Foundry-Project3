@@ -1,0 +1,377 @@
+
+======================================================================
+LLM-AS-JUDGE EVALUATION HARNESS
+Travel Concierge Agent - Performance Evaluation
+Date: 2026-02-02 11:24:25
+======================================================================
+
+============================================================
+Evaluating: Test 1: Paris Trip with BankGold
+============================================================
+Query: I want to go to Paris from 2026-06-01 to 2026-06-08 with my BankGold card
+2026-02-02 11:24:25 - travel_agent - INFO - ============================================================
+2026-02-02 11:24:25 - travel_agent - INFO - [START] Processing request: I want to go to Paris from 2026-06-01 to 2026-06-0...
+2026-02-02 11:24:25 - travel_agent - INFO - [PHASE] Phase: Init - Initialize session and capture user goal
+2026-02-02 11:24:25 - travel_agent - INFO - [PHASE] Phase: ClarifyRequirements - Ask targeted questions to gather required information
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f4cb' in position 44: character maps to <undefined>
+Call stack:
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 231, in <module>
+    main()
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 176, in main
+    outcome = evaluate(case)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 74, in evaluate
+    result = asyncio.run(run_request(query))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 678, in run_until_complete
+    self.run_forever()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\windows_events.py", line 322, in run_forever
+    super().run_forever()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 645, in run_forever
+    self._run_once()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 1999, in _run_once
+    handle._run()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\main.py", line 389, in run_request
+    requirements = extract_requirements_from_input(user_input)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\main.py", line 179, in extract_requirements_from_input
+    logger.info(f"\U0001f4cb Extracted requirements: {requirements}")
+Message: "\U0001f4cb Extracted requirements: {'destination': 'Go  Paris', 'dates': '2026-06-01 to 2026-06-08', 'card': 'BankGold'}"
+Arguments: ()
+2026-02-02 11:24:25 - travel_agent - INFO - [PHASE] Phase: PlanTools - Decide which tools to call and with what parameters
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f527' in position 44: character maps to <undefined>
+Call stack:
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 231, in <module>
+    main()
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 176, in main
+    outcome = evaluate(case)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 74, in evaluate
+    result = asyncio.run(run_request(query))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 678, in run_until_complete
+    self.run_forever()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\windows_events.py", line 322, in run_forever
+    super().run_forever()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 645, in run_forever
+    self._run_once()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 1999, in _run_once
+    handle._run()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\main.py", line 403, in run_request
+    kernel = create_kernel()
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\main.py", line 192, in create_kernel
+    logger.info("\U0001f527 Creating Semantic Kernel...")
+Message: '\U0001f527 Creating Semantic Kernel...'
+Arguments: ()
+2026-02-02 11:24:25 - travel_agent - INFO - [OK] Added AzureChatCompletion: gpt-4o
+2026-02-02 11:24:26 - travel_agent - INFO - [OK] Added AzureTextEmbedding: text-embedding-3-small
+2026-02-02 11:24:26 - travel_agent - INFO - [OK] Registered all tool plugins
+2026-02-02 11:24:26 - travel_agent - INFO - [OK] Set up kernel filters
+2026-02-02 11:24:26 - travel_agent - INFO - [PHASE] Phase: ExecuteTools - Execute planned tools and collect results
+2026-02-02 11:24:27 - travel_agent - INFO - [OK] Weather data retrieved for Go  Paris
+2026-02-02 11:24:28 - travel_agent - INFO - [OK] FX data retrieved: USD to EUR
+2026-02-02 11:24:43 - travel_agent - INFO - [OK] Search results retrieved for Go  Paris
+2026-02-02 11:24:43 - travel_agent - INFO - [OK] Card recommendation retrieved
+[ERROR] Retrieval error: This event loop is already running
+C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\rag\retriever.py:232: RuntimeWarning: coroutine 'generate_query_embedding' was never awaited
+  return [{"error": str(e)}]
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+2026-02-02 11:24:46 - travel_agent - INFO - [OK] Knowledge base info retrieved
+2026-02-02 11:24:46 - travel_agent - INFO - [PHASE] Phase: AnalyzeResults - Process tool outputs and validate data completeness
+2026-02-02 11:24:46 - travel_agent - INFO - [PHASE] Phase: ResolveIssues - Handle any problems or edge cases identified
+2026-02-02 11:24:46 - travel_agent - INFO - [PHASE] Phase: ProduceStructuredOutput - Generate Pydantic-validated JSON and natural language summary
+2026-02-02 11:24:46 - travel_agent - INFO - [PHASE] Phase: Done - Process complete
+2026-02-02 11:24:46 - travel_agent - INFO - [OK] Request processed successfully
+2026-02-02 11:24:46 - travel_agent - INFO - [SUMMARY] State Summary: {'session_id': '6d03d781-2f37-42ef-a02f-4fb5c5c5b4ae', 'phase': 'Done', 'phase_description': 'Process complete', 'created_at': '2026-02-02T19:24:25.024026', 'updated_at': '2026-02-02T19:24:46.378925', 'requirements': {'destination': 'Go  Paris', 'dates': '2026-06-01 to 2026-06-08', 'card': 'BankGold'}, 'tools_called': ['weather', 'fx', 'search', 'card', 'knowledge'], 'tool_errors': [], 'issues': [], 'resolved_issues': [], 'data_completeness': 1.0, 'has_structured_output': True, 'citations_count': 1}
+[OK] Valid JSON response
+
+--- Criterion Scores (0-5 scale) ---
+  accuracy: 1.0 (weight: 25%)
+  completeness: 5.0 (weight: 20%)
+  relevance: 2.0 (weight: 20%)
+  tool_usage: 3.0 (weight: 15%)
+  structure: 5.0 (weight: 10%)
+  citations: 5.0 (weight: 10%)
+
+--- Overall Results ---
+  Overall Score: 3.10/5.00
+  Status: PASSED
+
+============================================================
+Evaluating: Test 2: Tokyo Trip with BankPlatinum
+============================================================
+Query: Plan a trip to Tokyo from July 10-17, 2026. I have a BankPlatinum card
+2026-02-02 11:24:46 - travel_agent - INFO - ============================================================
+2026-02-02 11:24:46 - travel_agent - INFO - [START] Processing request: Plan a trip to Tokyo from July 10-17, 2026. I have...
+2026-02-02 11:24:46 - travel_agent - INFO - [PHASE] Phase: Init - Initialize session and capture user goal
+2026-02-02 11:24:46 - travel_agent - INFO - [PHASE] Phase: ClarifyRequirements - Ask targeted questions to gather required information
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+2026-02-02 11:24:46 - travel_agent - INFO - [PHASE] Phase: PlanTools - Decide which tools to call and with what parameters
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f4cb' in position 44: character maps to <undefined>
+Call stack:
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 231, in <module>
+    main()
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 176, in main
+    outcome = evaluate(case)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 74, in evaluate
+    result = asyncio.run(run_request(query))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 678, in run_until_complete
+    self.run_forever()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\windows_events.py", line 322, in run_forever
+    super().run_forever()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 645, in run_forever
+    self._run_once()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 1999, in _run_once
+    handle._run()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\main.py", line 389, in run_request
+    requirements = extract_requirements_from_input(user_input)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\main.py", line 179, in extract_requirements_from_input
+    logger.info(f"\U0001f4cb Extracted requirements: {requirements}")
+Message: "\U0001f4cb Extracted requirements: {'destination': 'Tokyo', 'dates': 'July 10 to 17', 'card': 'BankPlatinum'}"
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f527' in position 44: character maps to <undefined>
+Call stack:
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 231, in <module>
+    main()
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 176, in main
+    outcome = evaluate(case)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 74, in evaluate
+    result = asyncio.run(run_request(query))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 678, in run_until_complete
+    self.run_forever()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\windows_events.py", line 322, in run_forever
+    super().run_forever()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 645, in run_forever
+    self._run_once()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 1999, in _run_once
+    handle._run()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\main.py", line 403, in run_request
+    kernel = create_kernel()
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\main.py", line 192, in create_kernel
+    logger.info("\U0001f527 Creating Semantic Kernel...")
+Message: '\U0001f527 Creating Semantic Kernel...'
+Arguments: ()
+2026-02-02 11:24:47 - travel_agent - INFO - [OK] Added AzureChatCompletion: gpt-4o
+2026-02-02 11:24:48 - travel_agent - INFO - [OK] Added AzureTextEmbedding: text-embedding-3-small
+2026-02-02 11:24:48 - travel_agent - INFO - [OK] Registered all tool plugins
+2026-02-02 11:24:48 - travel_agent - INFO - [OK] Set up kernel filters
+2026-02-02 11:24:48 - travel_agent - INFO - [PHASE] Phase: ExecuteTools - Execute planned tools and collect results
+2026-02-02 11:24:50 - travel_agent - INFO - [OK] Weather data retrieved for Tokyo
+2026-02-02 11:24:51 - travel_agent - INFO - [OK] FX data retrieved: USD to JPY
+2026-02-02 11:25:08 - travel_agent - INFO - [OK] Search results retrieved for Tokyo
+2026-02-02 11:25:08 - travel_agent - INFO - [OK] Card recommendation retrieved
+[ERROR] Retrieval error: This event loop is already running
+2026-02-02 11:25:08 - travel_agent - INFO - [OK] Knowledge base info retrieved
+2026-02-02 11:25:08 - travel_agent - INFO - [PHASE] Phase: AnalyzeResults - Process tool outputs and validate data completeness
+2026-02-02 11:25:08 - travel_agent - INFO - [PHASE] Phase: ResolveIssues - Handle any problems or edge cases identified
+2026-02-02 11:25:08 - travel_agent - INFO - [PHASE] Phase: ProduceStructuredOutput - Generate Pydantic-validated JSON and natural language summary
+2026-02-02 11:25:08 - travel_agent - INFO - [PHASE] Phase: Done - Process complete
+2026-02-02 11:25:08 - travel_agent - INFO - [OK] Request processed successfully
+2026-02-02 11:25:08 - travel_agent - INFO - [SUMMARY] State Summary: {'session_id': '8e878a5a-c51a-45e5-bca8-f246e9665825', 'phase': 'Done', 'phase_description': 'Process complete', 'created_at': '2026-02-02T19:24:46.414528', 'updated_at': '2026-02-02T19:25:08.896055', 'requirements': {'destination': 'Tokyo', 'dates': 'July 10 to 17', 'card': 'BankPlatinum'}, 'tools_called': ['weather', 'fx', 'search', 'card', 'knowledge'], 'tool_errors': [], 'issues': [], 'resolved_issues': [], 'data_completeness': 1.0, 'has_structured_output': True, 'citations_count': 1}
+[OK] Valid JSON response
+
+--- Criterion Scores (0-5 scale) ---
+  accuracy: 5.0 (weight: 25%)
+  completeness: 5.0 (weight: 20%)
+  relevance: 5.0 (weight: 20%)
+  tool_usage: 3.0 (weight: 15%)
+  structure: 5.0 (weight: 10%)
+  citations: 5.0 (weight: 10%)
+
+--- Overall Results ---
+  Overall Score: 4.70/5.00
+  Status: PASSED
+
+============================================================
+Evaluating: Test 3: Barcelona Trip with BankRewards
+============================================================
+Query: I want to visit Barcelona from August 15-22, 2026 with my BankRewards card
+2026-02-02 11:25:08 - travel_agent - INFO - ============================================================
+2026-02-02 11:25:08 - travel_agent - INFO - [START] Processing request: I want to visit Barcelona from August 15-22, 2026 ...
+2026-02-02 11:25:08 - travel_agent - INFO - [PHASE] Phase: Init - Initialize session and capture user goal
+2026-02-02 11:25:08 - travel_agent - INFO - [PHASE] Phase: ClarifyRequirements - Ask targeted questions to gather required information
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f4cb' in position 44: character maps to <undefined>
+Call stack:
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 231, in <module>
+    main()
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 176, in main
+    outcome = evaluate(case)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 74, in evaluate
+    result = asyncio.run(run_request(query))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 678, in run_until_complete
+    self.run_forever()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\windows_events.py", line 322, in run_forever
+    super().run_forever()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 645, in run_forever
+    self._run_once()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 1999, in _run_once
+    handle._run()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\main.py", line 389, in run_request
+    requirements = extract_requirements_from_input(user_input)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\main.py", line 179, in extract_requirements_from_input
+    logger.info(f"\U0001f4cb Extracted requirements: {requirements}")
+Message: "\U0001f4cb Extracted requirements: {'destination': 'Visit Barcelona', 'dates': 'August 15 to 22', 'card': 'BankRewards'}"
+Arguments: ()
+2026-02-02 11:25:08 - travel_agent - INFO - [PHASE] Phase: PlanTools - Decide which tools to call and with what parameters
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f527' in position 44: character maps to <undefined>
+Call stack:
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 231, in <module>
+    main()
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 176, in main
+    outcome = evaluate(case)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\eval\judge.py", line 74, in evaluate
+    result = asyncio.run(run_request(query))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 678, in run_until_complete
+    self.run_forever()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\windows_events.py", line 322, in run_forever
+    super().run_forever()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 645, in run_forever
+    self._run_once()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 1999, in _run_once
+    handle._run()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\main.py", line 403, in run_request
+    kernel = create_kernel()
+  File "C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\main.py", line 192, in create_kernel
+    logger.info("\U0001f527 Creating Semantic Kernel...")
+Message: '\U0001f527 Creating Semantic Kernel...'
+Arguments: ()
+2026-02-02 11:25:09 - travel_agent - INFO - [OK] Added AzureChatCompletion: gpt-4o
+2026-02-02 11:25:10 - travel_agent - INFO - [OK] Added AzureTextEmbedding: text-embedding-3-small
+2026-02-02 11:25:10 - travel_agent - INFO - [OK] Registered all tool plugins
+2026-02-02 11:25:10 - travel_agent - INFO - [OK] Set up kernel filters
+2026-02-02 11:25:10 - travel_agent - INFO - [PHASE] Phase: ExecuteTools - Execute planned tools and collect results
+2026-02-02 11:25:11 - travel_agent - INFO - [OK] Weather data retrieved for Visit Barcelona
+2026-02-02 11:25:11 - travel_agent - INFO - [OK] FX data retrieved: USD to EUR
+2026-02-02 11:25:26 - travel_agent - INFO - [OK] Search results retrieved for Visit Barcelona
+2026-02-02 11:25:26 - travel_agent - INFO - [OK] Card recommendation retrieved
+[ERROR] Retrieval error: This event loop is already running
+2026-02-02 11:25:26 - travel_agent - INFO - [OK] Knowledge base info retrieved
+2026-02-02 11:25:26 - travel_agent - INFO - [PHASE] Phase: AnalyzeResults - Process tool outputs and validate data completeness
+2026-02-02 11:25:26 - travel_agent - INFO - [PHASE] Phase: ResolveIssues - Handle any problems or edge cases identified
+2026-02-02 11:25:26 - travel_agent - INFO - [PHASE] Phase: ProduceStructuredOutput - Generate Pydantic-validated JSON and natural language summary
+2026-02-02 11:25:26 - travel_agent - INFO - [PHASE] Phase: Done - Process complete
+2026-02-02 11:25:26 - travel_agent - INFO - [OK] Request processed successfully
+2026-02-02 11:25:26 - travel_agent - INFO - [SUMMARY] State Summary: {'session_id': 'f4b822f5-b784-4b2a-b368-19e3c27f0dc9', 'phase': 'Done', 'phase_description': 'Process complete', 'created_at': '2026-02-02T19:25:08.905062', 'updated_at': '2026-02-02T19:25:26.764690', 'requirements': {'destination': 'Visit Barcelona', 'dates': 'August 15 to 22', 'card': 'BankRewards'}, 'tools_called': ['weather', 'fx', 'search', 'card', 'knowledge'], 'tool_errors': [], 'issues': [], 'resolved_issues': [], 'data_completeness': 1.0, 'has_structured_output': True, 'citations_count': 1}
+[OK] Valid JSON response
+
+--- Criterion Scores (0-5 scale) ---
+  accuracy: 1.0 (weight: 25%)
+  completeness: 5.0 (weight: 20%)
+  relevance: 2.0 (weight: 20%)
+  tool_usage: 3.0 (weight: 15%)
+  structure: 5.0 (weight: 10%)
+  citations: 5.0 (weight: 10%)
+
+--- Overall Results ---
+  Overall Score: 3.10/5.00
+  Status: PASSED
+
+======================================================================
+EVALUATION SUMMARY
+======================================================================
+Total Test Cases: 3
+Passed: 3
+Failed: 0
+Pass Rate: 100.0%
+
+*** AVERAGE SCORE: 3.63/5.00 ***
+======================================================================
+
+CRITERION BREAKDOWN (averaged across all tests):
+--------------------------------------------------
+  accuracy       : 2.33/5.00 (weight: 25%)
+  completeness   : 5.00/5.00 (weight: 20%)
+  relevance      : 3.00/5.00 (weight: 20%)
+  tool_usage     : 3.00/5.00 (weight: 15%)
+  structure      : 5.00/5.00 (weight: 10%)
+  citations      : 5.00/5.00 (weight: 10%)
+
+Results saved to: app/eval/results.csv
+
+======================================================================
+EVALUATION COMPLETE
+======================================================================

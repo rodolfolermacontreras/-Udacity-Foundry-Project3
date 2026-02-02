@@ -55,3 +55,4 @@ def setup_logger(
 def get_logger(name: str = "travel_agent") -> logging.Logger:
     """Get a logger instance"""
     return logging.getLogger(name)
+
