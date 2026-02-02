@@ -604,6 +604,176 @@ thread = project_client.agents.create_thread_and_process_run(
 \newpage
 
 % ============================================================
+% RUBRIC COMPLIANCE
+% ============================================================
+\section{Rubric Compliance}
+
+This section demonstrates how each rubric requirement has been met in the implementation.
+
+\subsection{Section 1: Agentic Architecture}
+
+\subsubsection{8-Phase State Machine}
+The agent implements a complete 8-phase workflow as required:
+
+\begin{table}[H]
+\centering
+\caption{State Machine Implementation}
+\begin{tabular}{clp{7cm}}
+\toprule
+\textbf{Phase} & \textbf{Name} & \textbf{Implementation} \\
+\midrule
+1 & Init & Initialize session, validate configuration \\
+2 & ClarifyRequirements & Extract destination, dates, card from user input \\
+3 & PlanTools & Determine which tools to execute \\
+4 & ExecuteTools & Run Weather, FX, Search, Card, Knowledge tools \\
+5 & AnalyzeResults & Validate tool outputs, check data completeness \\
+6 & ResolveIssues & Handle errors, apply fallbacks \\
+7 & ProduceStructuredOutput & Generate Pydantic-validated TripPlan \\
+8 & Done & Return final JSON response \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Evidence}: See Figure~\ref{fig:syscheck1}, Figure~\ref{fig:syscheck2}, Figure~\ref{fig:syscheck3} for state transitions.
+
+\subsubsection{Semantic Kernel Integration}
+All tools are registered as Semantic Kernel plugins:
+
+\begin{lstlisting}[language=Python]
+from semantic_kernel import Kernel
+from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
+
+kernel = Kernel()
+kernel.add_plugin(WeatherTools(), plugin_name="WeatherTools")
+kernel.add_plugin(FxTools(), plugin_name="FxTools")
+kernel.add_plugin(SearchTools(), plugin_name="SearchTools")
+kernel.add_plugin(CardTools(), plugin_name="CardTools")
+kernel.add_plugin(KnowledgeTools(), plugin_name="KnowledgeTools")
+\end{lstlisting}
+
+\subsection{Section 2: Azure Services Integration}
+
+\subsubsection{Azure OpenAI}
+Three models deployed as required:
+\begin{itemize}[noitemsep]
+    \item \textbf{gpt-4o}: Primary chat model for agent reasoning
+    \item \textbf{gpt-4o-mini}: Lightweight model for simple tasks
+    \item \textbf{text-embedding-3-small}: Vector embeddings for RAG
+\end{itemize}
+\textbf{Evidence}: See Figure~\ref{fig:deployments}
+
+\subsubsection{Azure Cosmos DB with Vector Search}
+Vector-enabled container stores knowledge embeddings:
+\begin{itemize}[noitemsep]
+    \item Database: \texttt{ragdb}
+    \item Container: \texttt{snippets}
+    \item Partition Key: \texttt{/pk}
+    \item Vector Indexing: Enabled for similarity search
+\end{itemize}
+\textbf{Evidence}: See Figure~\ref{fig:cosmos}
+
+\subsubsection{Bing Grounding via Azure AI Foundry}
+Real-time web search integrated through AI Foundry Agent:
+\begin{itemize}[noitemsep]
+    \item Project: \texttt{udacity-travel-aoai-project}
+    \item Agent: Travel Concierge Agent with Bing tool
+    \item Authentication: DefaultAzureCredential
+\end{itemize}
+\textbf{Evidence}: See Figure~\ref{fig:bing}
+
+\subsection{Section 3: RAG Implementation}
+
+\subsubsection{Knowledge Ingestion}
+Seven knowledge documents ingested with embeddings:
+\begin{lstlisting}[basicstyle=\ttfamily\small]
+[START] Starting knowledge base ingestion...
+[OK] Embedding service initialized
+[OK] Connected to Cosmos DB: ragdb/snippets
+[OK] Successfully ingested 7 snippets
+\end{lstlisting}
+
+\subsubsection{Vector Similarity Search}
+Retrieval uses cosine similarity with VectorDistance:
+\begin{lstlisting}[language=Python]
+# Vector search query
+query = """
+SELECT TOP @k c.id, c.content, c.title,
+       VectorDistance(c.embedding, @queryVector) as similarity
+FROM c WHERE c.pk = 'knowledge'
+ORDER BY VectorDistance(c.embedding, @queryVector)
+"""
+\end{lstlisting}
+\textbf{Evidence}: See Figure~\ref{fig:rag}
+
+\subsection{Section 4: Structured Output}
+
+\subsubsection{Pydantic Data Models}
+All outputs validated using Pydantic schemas:
+
+\begin{lstlisting}[language=Python]
+class TripPlan(BaseModel):
+    destination: str
+    dates: TravelDates
+    weather: WeatherInfo
+    currency: CurrencyInfo
+    recommendations: List[Recommendation]
+    card_recommendation: CardRecommendation
+    citations: List[Citation]
+\end{lstlisting}
+
+\subsection{Section 5: Evaluation Harness}
+
+\subsubsection{LLM-as-Judge Implementation}
+Weighted scoring across six criteria:
+
+\begin{table}[H]
+\centering
+\caption{Evaluation Criteria Weights}
+\begin{tabular}{lcp{6cm}}
+\toprule
+\textbf{Criterion} & \textbf{Weight} & \textbf{Description} \\
+\midrule
+Accuracy & 25\% & Factual correctness of information \\
+Completeness & 20\% & All required fields populated \\
+Relevance & 20\% & Response addresses user query \\
+Tool Usage & 15\% & Appropriate tools called \\
+Structure & 10\% & Valid JSON schema \\
+Citations & 10\% & Sources provided \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Results}: 3.63/5.00 average score, 100\% pass rate (3/3 tests)
+
+\textbf{Evidence}: See Figure~\ref{fig:llmjudge}
+
+\subsection{Section 6: Testing and Quality}
+
+\subsubsection{Unit Tests}
+76 unit tests covering all components:
+\begin{itemize}[noitemsep]
+    \item \texttt{test\_models.py}: Data model validation
+    \item \texttt{test\_state.py}: State machine transitions
+    \item \texttt{test\_memory.py}: Memory systems
+    \item \texttt{test\_tools.py}: Tool functionality
+\end{itemize}
+
+\subsubsection{System Health Check}
+8/8 system checks passing:
+\begin{itemize}[noitemsep]
+    \item Environment Variables
+    \item Azure OpenAI Connection
+    \item Cosmos DB Connection
+    \item Tools (Weather, FX, Search, Card, Knowledge)
+    \item Grounding Search (Bing)
+    \item State Management
+    \item Memory Systems
+    \item Knowledge Base
+\end{itemize}
+
+\newpage
+
+% ============================================================
 % CONCLUSIONS
 % ============================================================
 \section{Conclusions}
