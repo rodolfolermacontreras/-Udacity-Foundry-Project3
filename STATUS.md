@@ -1,5 +1,89 @@
 # Project 3: AI Travel Concierge Agent - Status Tracker
 
+## Submission Artifacts (Files Added Beyond Seed Code)
+
+This section lists all files created for submission that are NOT part of the original seed code.
+
+### 1. Submission Report
+| File | Location | Description |
+|------|----------|-------------|
+| `submission_report.pdf` | `docs/submission_report.pdf` | **Main submission document** (19 pages) |
+| `submission_report.tex` | `docs/submission_report.tex` | LaTeX source for the report |
+
+### 2. Screenshots (Azure Portal Evidence)
+| File | Location | Shows |
+|------|----------|-------|
+| `Foundry_Models_Deployed.png` | `screenshots/` | Azure OpenAI deployments (gpt-4o, gpt-4o-mini, text-embedding-3-small) |
+| `Cosmos_db_items.png` | `screenshots/` | Cosmos DB Data Explorer with vector embeddings |
+| `Foundry_Agent_Bing.png` | `screenshots/` | AI Foundry Agent with Bing Grounding tool |
+| `Foundry_Project_Overview.png` | `screenshots/` | Azure AI Foundry project overview |
+| `System_checks_passed_1.png` | `screenshots/` | System health check results (part 1) |
+| `System_checks_passed_2.png` | `screenshots/` | System health check results (part 2) |
+| `System_checks_passed_3.png` | `screenshots/` | System health check results (part 3) |
+| `LLM_Evaluation_Overview.png` | `screenshots/` | LLM Judge evaluation output |
+| `RAG_Scores_Examples.png` | `screenshots/` | RAG retrieval with similarity scores |
+
+### 3. Test and Validation Outputs
+| File | Location | Content |
+|------|----------|---------|
+| `system_check_output.txt` | `outputs/` | Health check: **8/8 passed** |
+| `pytest_output.txt` | `outputs/` | Unit tests: **76/76 passed** |
+| `llm_judge_output.txt` | `outputs/` | LLM evaluation: **3.63/5.00 avg, 100% pass** |
+| `rag_ingest_output.txt` | `outputs/` | RAG ingestion: **7 documents** |
+
+### 4. Documentation Files (Created/Modified)
+| File | Location | Purpose |
+|------|----------|---------|
+| `STATUS.md` | Root | Project progress tracker (this file) |
+| `DEVELOPMENT_GUIDE.md` | Root | Step-by-step development guide |
+| `README.md` | Root | Project overview and quick start |
+| `app/README.md` | `app/` | Technical API documentation |
+
+### 5. Key Implementation Files (Beyond Seed Code)
+| File | Location | Purpose |
+|------|----------|---------|
+| `app/eval/judge.py` | `app/eval/` | Rule-based evaluation harness |
+| `app/eval/llm_judge.py` | `app/eval/` | LLM-as-Judge implementation |
+| `app/scripts/system_check.py` | `app/scripts/` | System health check script |
+| `app/rag/ingest.py` | `app/rag/` | RAG document ingestion |
+| `app/rag/retriever.py` | `app/rag/` | Vector similarity search |
+| `chat.py` | Root | Interactive CLI chat interface |
+
+---
+
+## How to Find Submission Items
+
+```
+Project_3/
+|-- docs/
+|   |-- submission_report.pdf    <-- MAIN REPORT FOR SUBMISSION
+|   |-- submission_report.tex    <-- LaTeX source
+|
+|-- screenshots/                  <-- ALL 9 SCREENSHOTS
+|   |-- Foundry_Models_Deployed.png
+|   |-- Cosmos_db_items.png
+|   |-- Foundry_Agent_Bing.png
+|   |-- Foundry_Project_Overview.png
+|   |-- System_checks_passed_1.png
+|   |-- System_checks_passed_2.png
+|   |-- System_checks_passed_3.png
+|   |-- LLM_Evaluation_Overview.png
+|   |-- RAG_Scores_Examples.png
+|
+|-- outputs/                      <-- TEST/VALIDATION LOGS
+|   |-- system_check_output.txt   (8/8 passed)
+|   |-- pytest_output.txt         (76/76 passed)
+|   |-- llm_judge_output.txt      (3.63/5.00)
+|   |-- rag_ingest_output.txt     (7 docs)
+|
+|-- app/eval/
+|   |-- judge.py                  <-- Evaluation harness
+|   |-- llm_judge.py              <-- LLM Judge
+|   |-- results.csv               <-- Evaluation results
+```
+
+---
+
 ## Project Overview
 
 | Field | Details |
@@ -353,6 +437,21 @@ Model: gpt-4o
 7. **COMPLETED** - LLM Judge evaluation harness (3.63/5.00 avg)
 8. **COMPLETED** - System check (8/8 passing)
 9. **COMPLETED** - Emoji removal and output file generation
-10. **IN PROGRESS** - Capture Azure Portal screenshots
-11. **PENDING** - Delete scaffolding scripts
-12. **PENDING** - Final GitHub commit and submission
+10. **COMPLETED** - Capture Azure Portal screenshots (9 screenshots)
+11. **COMPLETED** - Create submission report (19-page PDF)
+12. **COMPLETED** - Final GitHub commit
+
+## Submission Checklist
+
+- [x] Code implementation complete
+- [x] 76/76 unit tests passing
+- [x] 8/8 system checks passing
+- [x] LLM Judge evaluation (3.63/5.00)
+- [x] Azure OpenAI deployments screenshot
+- [x] Cosmos DB Data Explorer screenshot
+- [x] AI Foundry Bing Grounding screenshot
+- [x] State transitions screenshots
+- [x] RAG scores screenshot
+- [x] LLM Judge output screenshot
+- [x] Submission report PDF (19 pages)
+- [x] GitHub repository up to date
