@@ -10,10 +10,10 @@ AI Travel Concierge Agent for Banking International premium credit card customer
 
 - Python 3.12+
 - Azure OpenAI service with:
-  - gpt-4o-mini deployment (chat)
+  - gpt-4o deployment (chat)
   - text-embedding-3-small deployment (embeddings)
 - Azure Cosmos DB account with vector search enabled
-- Azure AI Project with Bing Search connection (optional)
+- Azure AI Foundry project with Bing Grounding (for live web search)
 
 ### Installation
 
@@ -54,9 +54,10 @@ print(plan_data["plan"]["destination"])
 | Component | Description |
 |-----------|-------------|
 | Semantic Kernel | Tool orchestration and state management |
-| Azure OpenAI | gpt-4o-mini (chat), text-embedding-3-small (embeddings) |
+| Azure OpenAI | gpt-4o (chat), text-embedding-3-small (embeddings) |
 | Memory Systems | Short-term (session) and long-term (persistent) memory |
 | Cosmos DB | Vector RAG for knowledge retrieval |
+| AI Foundry Agent | Bing Grounding for real-time web search |
 | Tools | WeatherTools, FxTools, SearchTools, CardTools, KnowledgeTools |
 
 ### Agent State Machine
@@ -134,9 +135,13 @@ chat.py                  # CLI chat interface
 - [x] Weather, FX, Card, Knowledge, Search tools
 - [x] RAG with Cosmos DB vector search
 - [x] Pydantic data models
-- [x] Unit tests (61 passing)
+- [x] Unit tests (76 passing)
+- [x] Azure OpenAI integration (gpt-4o, text-embedding-3-small)
+- [x] Cosmos DB vector search
+- [x] AI Foundry Agent with Bing Grounding
 
-**Pending:**
-- [ ] Azure resource configuration
-- [ ] End-to-end testing with live services
-- [ ] LLM Judge evaluation
+**Azure Resources (Udacity Account):**
+- Azure AI Services: `udacity-travel-aoai` (West US)
+- Cosmos DB: `udacity-travel-db-410` (West US)
+- AI Foundry Project: `udacity-travel-aoai-project`
+- Bing Grounding: `udacity-travel-bing-grounding`

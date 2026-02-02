@@ -260,7 +260,11 @@ def extract_currency_info(fx_data: Dict[str, Any], card_recommendation: CardReco
         if fx_data and "rates" in fx_data:
             rates = fx_data["rates"]
             target_currency = list(rates.keys())[0] if rates else "EUR"
-            rate = rates.get(target_currency, 0.85)
+            # Frankfurter API returns converted amount for the input amount
+            # So for 100 USD, rates['EUR'] = 84.46 means the rate is 0.8446
+            converted_amount = rates.get(target_currency, 85.0)
+            input_amount = fx_data.get("amount", 100.0)
+            rate = converted_amount / input_amount if input_amount > 0 else 0.85
             sample_meal_foreign = round(sample_meal_usd * rate, 2)
             
             # Calculate points based on card (assume 4x for dining)
@@ -268,7 +272,7 @@ def extract_currency_info(fx_data: Dict[str, Any], card_recommendation: CardReco
             points_earned = int(sample_meal_usd * points_multiplier)
             
             return CurrencyInfo(
-                usd_to_eur=rate if target_currency == "EUR" else None,
+                usd_to_eur=round(rate, 4) if target_currency == "EUR" else None,
                 sample_meal_usd=sample_meal_usd,
                 sample_meal_eur=sample_meal_foreign if target_currency == "EUR" else None,
                 points_earned=points_earned

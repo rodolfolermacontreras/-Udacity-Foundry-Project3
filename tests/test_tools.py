@@ -101,12 +101,14 @@ class TestSearchTool:
     
     @patch.dict('os.environ', {}, clear=True)
     def test_web_search_missing_config(self):
-        """Test web search with missing configuration"""
+        """Test web search with missing configuration falls back to mock results"""
         search_tool = SearchTools()
         result = search_tool.web_search("test query", 5)
         
-        assert len(result) == 1
-        assert "Missing configuration" in result[0]['title']
+        # Without config, should fall back to mock results
+        assert len(result) >= 1
+        assert 'title' in result[0]
+        assert 'snippet' in result[0]
     
     @patch.dict('os.environ', {
         'PROJECT_ENDPOINT': 'https://test.endpoint.com',

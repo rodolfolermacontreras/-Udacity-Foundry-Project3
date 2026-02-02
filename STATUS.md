@@ -139,86 +139,132 @@
 
 ### Session 3 - February 2, 2026
 
-**Objective**: Complete Azure setup using Udacity student account
+**Objective**: Complete Azure setup using Udacity student account and integrate Bing Grounding
 
 **Completed**:
 1. Logged into Azure using Udacity student credentials
    - Account: `student_7pmnza3vml59x3p6_004410128@vocareumvocareum.onmicrosoft.com`
    - Subscription: `Udacity-410` (052d7bab-4db1-4651-a14c-c5b4d14f6cb4)
    - Resource Group: `Regroup_8kkYx8D`
-2. Created Azure AI Services resource (`udacity-travel-aoai`)
-   - Deployed gpt-4o-mini model (GlobalStandard, 10K TPM)
+2. Created Azure AI Services resource (`udacity-travel-aoai`) in West US
+   - Deployed gpt-4o (GlobalStandard, 10K TPM)
+   - Deployed gpt-4o-mini (GlobalStandard, 10K TPM)
    - Deployed text-embedding-3-small (Standard, 10K TPM)
 3. Created Cosmos DB account (`udacity-travel-db-410`)
    - Serverless mode with vector search enabled
    - Database: `ragdb`, Container: `snippets`
-4. Updated `.env` file with new credentials
-5. Tested all connections:
-   - Azure OpenAI: Working (chat completions confirmed)
-   - Cosmos DB: Working (connection confirmed)
-   - Weather API: Working (Open-Meteo)
-   - Currency API: Working (Frankfurter)
-6. Ran full test suite: 76/76 tests passing
+4. Manually created Bing Grounding resource (`udacity-travel-bing-grounding`) via Azure Portal
+5. Manually created AI Foundry project (`udacity-travel-aoai-project`) via Azure AI Foundry Portal
+6. Created "Travel Concierge Agent" in AI Foundry with Bing tool connected
+   - Agent ID: `asst_NhCbOjFClBRXYD1VSMOnI7hU`
+   - Model: gpt-4o
+7. Updated `.env` file with corrected endpoint:
+   - Changed from `westus.api.cognitive.microsoft.com` to `udacity-travel-aoai.cognitiveservices.azure.com`
+8. Rewrote `app/tools/search.py` to integrate AI Foundry Agent with Bing Grounding
+   - Uses `azure-ai-projects` SDK with `DefaultAzureCredential`
+   - Falls back to mock results if agent unavailable
+9. Fixed FX rate display bug in `synthesis.py`
+   - Frankfurter API returns converted amount, not rate
+   - Now correctly calculates rate as `converted_amount / input_amount`
+10. All 76 tests passing
 
-**Azure Resources (Udacity Account)**:
+**Azure Resources (Udacity Account - Regroup_8kkYx8D)**:
 | Resource | Name | Region | Status |
 |----------|------|--------|--------|
 | Azure AI Services | udacity-travel-aoai | West US | Active |
+| gpt-4o | gpt-4o | West US | Deployed |
 | gpt-4o-mini | gpt-4o-mini | West US | Deployed |
 | text-embedding-3-small | text-embedding-3-small | West US | Deployed |
 | Cosmos DB | udacity-travel-db-410 | West US | Active |
-| Database | ragdb | West US | Created |
-| Container | snippets | West US | Created |
+| AI Foundry Project | udacity-travel-aoai-project | West US | Active |
+| Bing Grounding | udacity-travel-bing-grounding | Global | Active |
+| AI Agent | Travel Concierge Agent | West US | Active |
 
-**Bing Grounding Status**:
-- Could not create Bing Grounding resource via CLI (internal server error)
-- Udacity account lacks permission to register Microsoft.Bing provider
-- Search tool will use mock results (fallback mode)
-- Alternative: Create Bing Grounding manually via Azure portal if needed
+**Bing Grounding Integration**:
+- Successfully integrated via AI Foundry Agent
+- Search queries now return real-time web results from Bing
+- Example: "best restaurants in Paris" returns current 2026 restaurant recommendations
+- Falls back to mock results if Azure CLI not logged in
+
+**Bug Fixes**:
+1. FX Rate Display: Changed from showing converted amount (84.46) as rate to actual rate (0.8446)
+   - File: `app/synthesis.py` line 263
+   - Fix: `rate = converted_amount / input_amount`
 
 **Test Results**:
 ```
-Weather API: Working (Paris forecast retrieved)
-Currency API: Working (USD/EUR rate: 0.84459)
-Azure OpenAI: Working ("Hello! How can I assist you today?")
-Cosmos DB: Working (connection successful)
+Bing Search: Working (real-time results via AI Foundry Agent)
+Weather API: Working (Open-Meteo)
+Currency API: Working (Frankfurter, rate calculation fixed)
+Azure OpenAI: Working (chat completions confirmed)
+Cosmos DB: Working (connection confirmed)
 Unit Tests: 76/76 passing
 ```
 
+**Files Modified**:
+- `app/tools/search.py` - Complete rewrite for AI Foundry Agent integration
+- `app/synthesis.py` - Fixed FX rate calculation bug
+- `tests/test_tools.py` - Updated test for search fallback behavior
+- `.env` - Corrected AZURE_OPENAI_ENDPOINT
+
 **Next Steps**:
-1. Try creating Bing Grounding via Azure portal (optional)
-2. Run full chat.py demo and capture screenshots
-3. Document submission requirements
-4. Final cleanup
+1. Run full chat.py demo to verify end-to-end
+2. Capture screenshots for Udacity submission
+3. Final commit to GitHub
 
 ---
 
 ## Pending Tasks
 
-- [x] Azure AI Services resource (gpt-4o-mini, embeddings)
+- [x] Azure AI Services resource (gpt-4o, gpt-4o-mini, embeddings)
 - [x] Cosmos DB with vector search
 - [x] Update .env with credentials
 - [x] Test Azure OpenAI connection
 - [x] Test Cosmos DB connection
-- [ ] Bing Grounding (optional - manual portal setup)
-- [ ] Full demo run with chat.py
+- [x] Bing Grounding via AI Foundry Agent
+- [x] Search tool integration with live Bing results
+- [x] Fix FX rate display bug
+- [ ] Full demo run with chat.py (verify all fixes)
 - [ ] Screenshot capture for submission
-- [ ] Final code review and cleanup
+- [ ] Final commit to GitHub
+
+## Submission Requirements
+
+Based on Udacity project requirements, the following screenshots are needed:
+
+### Required Screenshots:
+1. **Azure AI Foundry Portal** - Show the AI Foundry project with agent configuration
+2. **Agent with Bing Tool** - Show the Travel Concierge Agent with Bing grounding connected
+3. **Azure OpenAI Deployments** - Show gpt-4o, gpt-4o-mini, text-embedding-3-small deployments
+4. **Cosmos DB** - Show the database and container with vector search enabled
+5. **Chat Demo** - Show the agent responding to a travel query with:
+   - Weather information
+   - Currency conversion (with correct rate)
+   - Bing search results
+   - Card recommendations
+6. **Test Results** - Show all 76 tests passing
+
+### Screenshot Locations:
+Take screenshots in the Azure Portal and AI Foundry Portal showing:
+- https://portal.azure.com - Azure resources
+- https://ai.azure.com - AI Foundry project and agent
 
 ## Notes
 
 - Project follows strict rules: no emojis, proper documentation, GitHub tracking
 - Virtual environment at `.venv/` (excluded from git)
 - Credentials in `.env` file (excluded from git, template in `env.example`)
-- Model deployment: gpt-4.1-mini (Azure updated naming from gpt-4o-mini)
-- Cosmos DB uses serverless mode for cost efficiency
+- Search tool requires Azure CLI login to Udacity account for Bing Grounding
+- FX rate bug fixed: now shows 0.8446 instead of 84.46
 
 ## Big Picture Plan
 
 1. **COMPLETED** - Core implementation (state machine, memory, tools, RAG, synthesis)
 2. **COMPLETED** - Unit tests (76/76 passing)
 3. **COMPLETED** - Azure OpenAI and Cosmos DB provisioning
-4. **IN PROGRESS** - Azure AI Foundry setup (portal steps required)
-5. **PENDING** - End-to-end testing with live services
-6. **PENDING** - Screenshots and documentation for Udacity submission
-7. **PENDING** - Final cleanup (delete scaffolding scripts)
+4. **COMPLETED** - Azure AI Foundry setup with Bing Grounding
+5. **COMPLETED** - Search tool integration with AI Foundry Agent
+6. **COMPLETED** - Bug fixes (FX rate display)
+7. **IN PROGRESS** - End-to-end demo verification
+8. **PENDING** - Screenshots for Udacity submission
+9. **PENDING** - Final GitHub commit
