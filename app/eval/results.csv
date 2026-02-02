@@ -1,0 +1,4 @@
+test_name,destination,valid_json,has_citations,card_mentioned,overall_score,passed
+Test 1: Paris Trip with BankGold,Paris,True,True,False,3.1,True
+Test 2: Tokyo Trip with BankPlatinum,Tokyo,True,True,True,4.7,True
+Test 3: Barcelona Trip with BankRewards,Barcelona,True,True,False,3.1,True

@@ -93,11 +93,18 @@ async def generate_query_embedding(query: str) -> List[float]:
         embedding_service = get_embedding_service()
         
         if embedding_service is None:
-            logger.warning("⚠️ Embedding service not available")
+            logger.warning("Embedding service not available")
             return []
         
-        embeddings = await embedding_service.generate_embeddings([query])
-        return embeddings[0] if embeddings else []
+        result = await embedding_service.generate_embeddings([query])
+        # Handle numpy array or list result
+        if result is not None and len(result) > 0:
+            embedding = result[0]
+            # Convert numpy array to list if needed
+            if hasattr(embedding, 'tolist'):
+                embedding = embedding.tolist()
+            return embedding
+        return []
         
     except Exception as e:
         logger.error(f"❌ Failed to generate query embedding: {e}")

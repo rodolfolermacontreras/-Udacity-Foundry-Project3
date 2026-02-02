@@ -106,24 +106,29 @@ async def embed_texts(texts: List[str]) -> List[List[float]]:
         embedding_service = get_embedding_service()
         
         if embedding_service is None:
-            logger.warning("⚠️ Embedding service not available")
+            logger.warning("Embedding service not available")
             return []
         
-        logger.info(f"🔄 Generating embeddings for {len(texts)} texts")
+        logger.info(f"Generating embeddings for {len(texts)} texts")
         
         embeddings = []
         for text in texts:
-            embedding = await embedding_service.generate_embeddings([text])
-            if embedding:
-                embeddings.append(embedding[0])
+            result = await embedding_service.generate_embeddings([text])
+            # Handle numpy array or list result
+            if result is not None and len(result) > 0:
+                embedding = result[0]
+                # Convert numpy array to list if needed
+                if hasattr(embedding, 'tolist'):
+                    embedding = embedding.tolist()
+                embeddings.append(embedding)
             else:
                 embeddings.append([])
         
-        logger.info(f"✅ Generated {len(embeddings)} embeddings")
+        logger.info(f"Generated {len(embeddings)} embeddings")
         return embeddings
         
     except Exception as e:
-        logger.error(f"❌ Failed to generate embeddings: {e}")
+        logger.error(f"Failed to generate embeddings: {e}")
         return []
 
 
