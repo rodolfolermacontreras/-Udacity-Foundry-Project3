@@ -224,38 +224,70 @@ Unit Tests: 76/76 passing
 - [x] Bing Grounding via AI Foundry Agent
 - [x] Search tool integration with live Bing results
 - [x] Fix FX rate display bug
-- [ ] Full demo run with chat.py (verify all fixes)
-- [ ] Screenshot capture for submission
-- [ ] Final commit to GitHub
+- [x] Implement LLM Judge evaluation harness (judge.py)
+- [ ] Configure AI Foundry Agent instructions
+- [ ] Full demo run with state transitions visible
+- [ ] RAG retrieval with VectorDistance scores
+- [ ] Run LLM Judge and capture numerical output
+- [ ] All screenshots for submission
 
-## Submission Requirements
-
-Based on Udacity project requirements, the following screenshots are needed:
+## Submission Requirements (Per Rubric)
 
 ### Required Screenshots:
-1. **Azure AI Foundry Portal** - Show the AI Foundry project with agent configuration
-2. **Agent with Bing Tool** - Show the Travel Concierge Agent with Bing grounding connected
-3. **Azure OpenAI Deployments** - Show gpt-4o, gpt-4o-mini, text-embedding-3-small deployments
-4. **Cosmos DB** - Show the database and container with vector search enabled
-5. **Chat Demo** - Show the agent responding to a travel query with:
-   - Weather information
-   - Currency conversion (with correct rate)
-   - Bing search results
-   - Card recommendations
-6. **Test Results** - Show all 76 tests passing
 
-### Screenshot Locations:
-Take screenshots in the Azure Portal and AI Foundry Portal showing:
-- https://portal.azure.com - Azure resources
-- https://ai.azure.com - AI Foundry project and agent
+| # | Screenshot | Location | Status |
+|---|------------|----------|--------|
+| 1 | Azure OpenAI Deployments | Azure Portal > Azure OpenAI > Deployments | NEED |
+| 2 | Cosmos DB Data Explorer with items | Azure Portal > Cosmos DB > Data Explorer | NEED |
+| 3 | Azure AI Studio Bing connection | ai.azure.com > Project > Connections | HAVE (Foundry_Agent_Bing.png) |
+| 4 | State transitions console output | Run chat.py with logging | NEED |
+| 5 | RAG VectorDistance scores | Run retriever with similarity scores | NEED |
+| 6 | LLM Judge numerical score | Run `python -m app.eval.judge` | NEED |
+
+### Screenshot Details:
+
+**1. Azure OpenAI Deployments**
+- URL: portal.azure.com > udacity-travel-aoai > Model deployments
+- Show: gpt-4o, gpt-4o-mini, text-embedding-3-small all with "Succeeded" status
+
+**2. Cosmos DB Data Explorer**
+- URL: portal.azure.com > udacity-travel-db-410 > Data Explorer
+- Show: ragdb database, snippets container, at least one stored item with embedding vector
+
+**3. Azure AI Studio Bing Connection (HAVE)**
+- URL: ai.azure.com > udacity-travel-aoai-project > Agents
+- Show: Travel Concierge Agent with Bing tool connected, "Active" status
+
+**4. State Transitions Console**
+- Run: `python chat.py` with a travel query
+- Show: Phase transitions (Init -> ClarifyRequirements -> PlanTools -> ExecuteTools -> ... -> Done)
+
+**5. RAG VectorDistance Scores**
+- Run: Knowledge retrieval that shows similarity scores
+- Show: Query embedding generated, VectorDistance query, results with scores
+
+**6. LLM Judge Numerical Output**
+- Run: `python -m app.eval.judge`
+- Show: Criterion scores (0-5), overall weighted score, pass/fail status
+
+### AI Foundry Agent Configuration Needed:
+The agent at ai.azure.com needs instructions configured:
+```
+You are a Travel Search Assistant for Banking International's Travel Concierge service.
+When given a search query, use your Bing search capability to find relevant travel information.
+Return factual, well-sourced information with ratings and prices when available.
+```
+Temperature: 0.7
+Model: gpt-4o
 
 ## Notes
 
-- Project follows strict rules: no emojis, proper documentation, GitHub tracking
+- Project follows strict rules: no emojis in code, proper documentation, GitHub tracking
 - Virtual environment at `.venv/` (excluded from git)
 - Credentials in `.env` file (excluded from git, template in `env.example`)
 - Search tool requires Azure CLI login to Udacity account for Bing Grounding
 - FX rate bug fixed: now shows 0.8446 instead of 84.46
+- LLM Judge implemented with weighted scoring (accuracy, completeness, relevance, tool_usage, structure, citations)
 
 ## Big Picture Plan
 
@@ -265,6 +297,8 @@ Take screenshots in the Azure Portal and AI Foundry Portal showing:
 4. **COMPLETED** - Azure AI Foundry setup with Bing Grounding
 5. **COMPLETED** - Search tool integration with AI Foundry Agent
 6. **COMPLETED** - Bug fixes (FX rate display)
-7. **IN PROGRESS** - End-to-end demo verification
-8. **PENDING** - Screenshots for Udacity submission
-9. **PENDING** - Final GitHub commit
+7. **COMPLETED** - LLM Judge evaluation harness
+8. **IN PROGRESS** - Configure AI Foundry Agent instructions
+9. **PENDING** - Capture all required screenshots
+10. **PENDING** - Run LLM Judge and capture output
+11. **PENDING** - Final GitHub commit and submission
