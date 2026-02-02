@@ -137,16 +137,73 @@
 
 ---
 
+### Session 3 - February 2, 2026
+
+**Objective**: Complete Azure setup using Udacity student account
+
+**Completed**:
+1. Logged into Azure using Udacity student credentials
+   - Account: `student_7pmnza3vml59x3p6_004410128@vocareumvocareum.onmicrosoft.com`
+   - Subscription: `Udacity-410` (052d7bab-4db1-4651-a14c-c5b4d14f6cb4)
+   - Resource Group: `Regroup_8kkYx8D`
+2. Created Azure AI Services resource (`udacity-travel-aoai`)
+   - Deployed gpt-4o-mini model (GlobalStandard, 10K TPM)
+   - Deployed text-embedding-3-small (Standard, 10K TPM)
+3. Created Cosmos DB account (`udacity-travel-db-410`)
+   - Serverless mode with vector search enabled
+   - Database: `ragdb`, Container: `snippets`
+4. Updated `.env` file with new credentials
+5. Tested all connections:
+   - Azure OpenAI: Working (chat completions confirmed)
+   - Cosmos DB: Working (connection confirmed)
+   - Weather API: Working (Open-Meteo)
+   - Currency API: Working (Frankfurter)
+6. Ran full test suite: 76/76 tests passing
+
+**Azure Resources (Udacity Account)**:
+| Resource | Name | Region | Status |
+|----------|------|--------|--------|
+| Azure AI Services | udacity-travel-aoai | West US | Active |
+| gpt-4o-mini | gpt-4o-mini | West US | Deployed |
+| text-embedding-3-small | text-embedding-3-small | West US | Deployed |
+| Cosmos DB | udacity-travel-db-410 | West US | Active |
+| Database | ragdb | West US | Created |
+| Container | snippets | West US | Created |
+
+**Bing Grounding Status**:
+- Could not create Bing Grounding resource via CLI (internal server error)
+- Udacity account lacks permission to register Microsoft.Bing provider
+- Search tool will use mock results (fallback mode)
+- Alternative: Create Bing Grounding manually via Azure portal if needed
+
+**Test Results**:
+```
+Weather API: Working (Paris forecast retrieved)
+Currency API: Working (USD/EUR rate: 0.84459)
+Azure OpenAI: Working ("Hello! How can I assist you today?")
+Cosmos DB: Working (connection successful)
+Unit Tests: 76/76 passing
+```
+
+**Next Steps**:
+1. Try creating Bing Grounding via Azure portal (optional)
+2. Run full chat.py demo and capture screenshots
+3. Document submission requirements
+4. Final cleanup
+
+---
+
 ## Pending Tasks
 
-- [ ] Create Azure AI Foundry project (portal)
-- [ ] Create Grounding with Bing Search resource (portal)
-- [ ] Connect Bing to agent in Foundry
-- [ ] Update .env with Foundry connection details
-- [ ] End-to-end testing with live services
+- [x] Azure AI Services resource (gpt-4o-mini, embeddings)
+- [x] Cosmos DB with vector search
+- [x] Update .env with credentials
+- [x] Test Azure OpenAI connection
+- [x] Test Cosmos DB connection
+- [ ] Bing Grounding (optional - manual portal setup)
+- [ ] Full demo run with chat.py
 - [ ] Screenshot capture for submission
 - [ ] Final code review and cleanup
-- [ ] Delete scaffolding scripts after integration
 
 ## Notes
 
