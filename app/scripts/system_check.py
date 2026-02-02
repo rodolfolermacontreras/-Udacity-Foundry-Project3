@@ -101,18 +101,33 @@ def check_tools():
     print("\n[CHECK] Tool Integration")
     print("-" * 40)
     try:
-        import asyncio
         from app.tools.weather import WeatherTools
         from app.tools.fx import FxTools
         from app.tools.card import CardTools
         from app.tools.knowledge import KnowledgeTools
         from app.tools.search import SearchTools
+        
+        # Test Weather tool
         weather = WeatherTools().get_weather(48.8566, 2.3522)
+        print(f"[OK] Weather: {weather.get('temperature', 'N/A')}C")
+        
+        # Test FX tool
         fx = FxTools().convert_fx(100, "USD", "EUR")
+        print(f"[OK] FX: 100 USD = {fx.get('rates', {}).get('EUR', 'N/A')} EUR")
+        
+        # Test Card tool
         card = CardTools().recommend_card("5812", 100.0, "France")
-        knowledge = asyncio.run(KnowledgeTools().search_knowledge("BankGold dining"))
+        print(f"[OK] Card: {card.get('card', 'N/A')}")
+        
+        # Test Knowledge tool (synchronous)
+        knowledge = KnowledgeTools().search_knowledge("BankGold dining")
+        print(f"[OK] Knowledge: Found {len(knowledge.get('results', []))} results")
+        
+        # Test Search tool
         search = SearchTools().web_search("test", max_results=1)
-        print("[OK] Weather, FX, Card, Knowledge, Search tools: Working")
+        print(f"[OK] Search: {len(search)} result(s)")
+        
+        print("[OK] All tools working")
         return True
     except Exception as e:
         print(f"[FAIL] Tool check failed: {e}")
