@@ -134,7 +134,7 @@ class CardTools:
             - explanation: Why this card is recommended
         """
         try:
-            logger.info(f"💳 Recommending card for MCC {mcc}, ${amount} in {country}")
+            logger.info(f"[CARD] Recommending card for MCC {mcc}, ${amount} in {country}")
             
             best_card = None
             best_multiplier = 0

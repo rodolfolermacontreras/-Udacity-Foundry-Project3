@@ -58,8 +58,18 @@ tmp/
 temp/
 *.tmp
 
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
 # Jupyter Notebooks
 .ipynb_checkpoints/
 
 # Azure
 .azure/
+
+# Class reference material (not part of submission)
+Class/

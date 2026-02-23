@@ -24,7 +24,7 @@ def synthesize_to_tripplan(tool_results: Dict[str, Any], requirements: Dict[str,
         JSON string with the complete travel plan
     """
     try:
-        logger.info("🔄 Synthesizing tool results into TripPlan")
+        logger.info("[SYNTH] Synthesizing tool results into TripPlan")
         
         # Extract destination and dates from requirements
         destination = requirements.get("destination", "Unknown")
@@ -365,16 +365,16 @@ def format_trip_plan_display(trip_plan_json: str) -> str:
         
         lines = []
         lines.append("=" * 60)
-        lines.append("🎯 TRAVEL PLAN")
+        lines.append("TRAVEL PLAN")
         lines.append("=" * 60)
         lines.append(f"[DEST] Destination: {plan.get('destination', 'N/A')}")
-        lines.append(f"📅 Travel Dates: {plan.get('travel_dates', 'N/A')}")
+        lines.append(f"Travel Dates: {plan.get('travel_dates', 'N/A')}")
         lines.append("")
         
         # Weather section
         weather = plan.get("weather")
         if weather:
-            lines.append("🌤️ WEATHER")
+            lines.append("WEATHER")
             lines.append("-" * 30)
             lines.append(f"Temperature: {weather.get('temperature_c', 'N/A')}°C")
             lines.append(f"Conditions: {weather.get('conditions', 'N/A')}")
@@ -384,7 +384,7 @@ def format_trip_plan_display(trip_plan_json: str) -> str:
         # Card recommendation
         card = plan.get("card_recommendation")
         if card:
-            lines.append("💳 CARD RECOMMENDATION")
+            lines.append("CARD RECOMMENDATION")
             lines.append("-" * 30)
             lines.append(f"Card: {card.get('card', 'N/A')}")
             lines.append(f"Benefit: {card.get('benefit', 'N/A')}")
@@ -394,7 +394,7 @@ def format_trip_plan_display(trip_plan_json: str) -> str:
         # Currency info
         currency = plan.get("currency_info")
         if currency:
-            lines.append("💰 CURRENCY INFO")
+            lines.append("CURRENCY INFO")
             lines.append("-" * 30)
             lines.append(f"Sample Meal (USD): ${currency.get('sample_meal_usd', 'N/A')}")
             if currency.get("sample_meal_eur"):
@@ -405,7 +405,7 @@ def format_trip_plan_display(trip_plan_json: str) -> str:
         # Next steps
         next_steps = plan.get("next_steps", [])
         if next_steps:
-            lines.append("📋 NEXT STEPS")
+            lines.append("NEXT STEPS")
             lines.append("-" * 30)
             for i, step in enumerate(next_steps, 1):
                 lines.append(f"{i}. {step}")

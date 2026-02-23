@@ -176,7 +176,7 @@ def extract_requirements_from_input(user_input: str) -> dict:
                 requirements["card"] = "BankRewards"
             break
     
-    logger.info(f"📋 Extracted requirements: {requirements}")
+    logger.info(f"[EXTRACT] Extracted requirements: {requirements}")
     return requirements
 
 
@@ -189,7 +189,7 @@ def create_kernel() -> Kernel:
     - Azure OpenAI text embedding service
     - Tool plugins (WeatherTools, FxTools, SearchTools, CardTools, KnowledgeTools)
     """
-    logger.info("🔧 Creating Semantic Kernel...")
+    logger.info("[INIT] Creating Semantic Kernel...")
     
     kernel = Kernel()
     
@@ -482,7 +482,7 @@ def main():
         result = asyncio.run(run_request(user_input))
         
         print("\n" + "=" * 60)
-        print("🎯 TRAVEL PLAN")
+        print("TRAVEL PLAN")
         print("=" * 60)
         
         # Pretty print the result

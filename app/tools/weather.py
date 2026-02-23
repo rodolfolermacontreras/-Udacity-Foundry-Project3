@@ -40,7 +40,7 @@ class WeatherTools:
                 "timezone": "UTC"
             }
             
-            logger.info(f"🌤️ Fetching weather for coordinates ({lat}, {lon})")
+            logger.info(f"[WEATHER] Fetching weather for coordinates ({lat}, {lon})")
             
             response = requests.get(url, params=params, timeout=10)
             response.raise_for_status()

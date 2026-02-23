@@ -41,7 +41,7 @@ class FxTools:
                 "to": target.upper()
             }
             
-            logger.info(f"💱 Converting {amount} {base} to {target}")
+            logger.info(f"[FX] Converting {amount} {base} to {target}")
             
             response = requests.get(url, params=params, timeout=10)
             response.raise_for_status()

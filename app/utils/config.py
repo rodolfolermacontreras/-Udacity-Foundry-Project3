@@ -131,7 +131,7 @@ def validate_all_config() -> Dict[str, any]:
 
 def print_config_summary(config: Dict[str, any]) -> None:
     """Print a summary of the current configuration"""
-    print("🔧 Configuration Summary")
+    print("Configuration Summary")
     print("=" * 40)
     
     # Azure config

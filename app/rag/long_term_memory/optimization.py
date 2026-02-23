@@ -36,7 +36,7 @@ async def prune_ai_optimized(container: Any,
         if len(memories) <= max_memories:
             return 0
 
-        logger.info(f"🧠 AI pruning: analyzing {len(memories)} memories")
+        logger.info(f"[PRUNE] AI pruning: analyzing {len(memories)} memories")
 
         # Ask AI to score them
         scores = await ai_score_memories_for_retention(memories)
@@ -245,7 +245,7 @@ async def archive_old_memories(container: Any,
             except Exception as e:
                 logger.warning(f"Failed to archive memory {mem.get('id')}: {e}")
 
-        logger.info(f"📦 Archived {count} old/low-value memories")
+        logger.info(f"[ARCHIVE] Archived {count} old/low-value memories")
         return count
     except Exception as e:
         logger.error(f"[ERROR] Archiving failed: {e}")

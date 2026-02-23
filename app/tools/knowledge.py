@@ -93,7 +93,7 @@ class KnowledgeTools:
             Dictionary with card recommendation and benefits
         """
         try:
-            logger.info(f"📚 Querying knowledge base for MCC {mcc} in {country}")
+            logger.info(f"[KB] Querying knowledge base for MCC {mcc} in {country}")
             
             # Construct search query
             query = f"best credit card benefits for {self._mcc_to_category(mcc)} purchases in {country}"
@@ -163,7 +163,7 @@ class KnowledgeTools:
             Dictionary with lounge access information
         """
         try:
-            logger.info(f"🏢 Getting lounge rules for {card_name}")
+            logger.info(f"[LOUNGE] Getting lounge rules for {card_name}")
             
             card_info = LOCAL_KNOWLEDGE_BASE.get(card_name)
             lounge_rules = LOCAL_KNOWLEDGE_BASE.get("lounge_rules", {})
@@ -199,7 +199,7 @@ class KnowledgeTools:
             Dictionary with travel insurance information
         """
         try:
-            logger.info(f"🛡️ Getting travel insurance for {card_name}")
+            logger.info(f"[INSURANCE] Getting travel insurance for {card_name}")
             
             card_info = LOCAL_KNOWLEDGE_BASE.get(card_name)
             insurance_info = LOCAL_KNOWLEDGE_BASE.get("travel_insurance", {})
