@@ -1,6 +1,8 @@
+Agent run status: RunStatus.FAILED
+Agent run status: RunStatus.FAILED
 Travel Concierge Agent - System Health Check
 ============================================================
-Timestamp: 2026-02-02 11:14:41
+Timestamp: 2026-03-09 07:33:14
 
 
 [RUNNING] Environment Variables...
@@ -29,16 +31,16 @@ Timestamp: 2026-02-02 11:14:41
 
 [CHECK] Cosmos DB Service
 ----------------------------------------
-[OK] Cosmos DB connected (found 1 item(s))
+[OK] Cosmos DB connected (found 0 item(s))
 
 [RUNNING] Tools...
 
 [CHECK] Tool Integration
 ----------------------------------------
 [OK] Weather: N/AC
-[OK] FX: 100 USD = 84.46 EUR
+[OK] FX: 100 USD = 86.5 EUR
 [OK] Card: N/A
-[OK] Knowledge: Found 5 results
+[OK] Knowledge: Found 0 results
 [OK] Search: 1 result(s)
 [OK] All tools working
 
@@ -47,11 +49,15 @@ Timestamp: 2026-02-02 11:14:41
 [CHECK] Azure Grounding Search
 ----------------------------------------
 Querying Agent for: "best restaurants in Tokyo 2025"
-[OK] Received 1 result(s):
+[OK] Received 2 result(s):
 
-1. Web search: best restaurants in Tokyo 2025
-   URL: https://bing.com
-   Tokyo's culinary scene in 2025 offers a wealth of exceptional dining experiences...
+1. Tokyo Travel Guide
+   URL: https://gotokyo.org
+   Official Tokyo tourism guide. Explore Shibuya, Shinjuku, traditional temples, an...
+
+2. Best Things to Do in Tokyo
+   URL: https://timeout.com/tokyo
+   Top attractions include Senso-ji Temple, Meiji Shrine, Tsukiji Outer Market, and...
 
 
 [RUNNING] State Management...

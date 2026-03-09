@@ -137,4 +137,4 @@ tests/test_state.py::TestEnhancedAgentState::test_state_reset_enhanced
     self.updated_at = datetime.utcnow()
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-====================== 76 passed, 308 warnings in 7.22s =======================
+====================== 76 passed, 308 warnings in 11.59s ======================
