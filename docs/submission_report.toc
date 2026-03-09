@@ -1,42 +1,44 @@
-\contentsline {section}{\numberline {1}Architecture Diagram}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Component Summary}{2}{subsection.1.1}%
-\contentsline {section}{\numberline {2}Azure Resources}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Azure OpenAI Deployments}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Azure Cosmos DB}{3}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Azure AI Foundry Agent with Bing Grounding}{5}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Test Results}{7}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Unit Tests}{7}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}System Health Check}{7}{subsection.3.2}%
-\contentsline {section}{\numberline {4}LLM-as-Judge Evaluation}{10}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Evaluation Criteria and Weights}{10}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Evaluation Results}{10}{subsection.4.2}%
-\contentsline {section}{\numberline {5}RAG Implementation}{12}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Knowledge Base}{12}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Embedding Configuration}{12}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}RAG Ingestion Results}{13}{subsection.5.3}%
-\contentsline {section}{\numberline {6}Key Implementation Details}{14}{section.6}%
-\contentsline {subsection}{\numberline {6.1}8-Phase State Machine}{14}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Tool Integration}{14}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Pydantic Output Validation}{14}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Bing Grounding Integration}{14}{subsection.6.4}%
-\contentsline {section}{\numberline {7}Rubric Compliance}{15}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Section 1: Agentic Architecture}{15}{subsection.7.1}%
-\contentsline {subsubsection}{\numberline {7.1.1}8-Phase State Machine}{15}{subsubsection.7.1.1}%
-\contentsline {subsubsection}{\numberline {7.1.2}Semantic Kernel Integration}{15}{subsubsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.2}Section 2: Azure Services Integration}{15}{subsection.7.2}%
-\contentsline {subsubsection}{\numberline {7.2.1}Azure OpenAI}{15}{subsubsection.7.2.1}%
-\contentsline {subsubsection}{\numberline {7.2.2}Azure Cosmos DB with Vector Search}{16}{subsubsection.7.2.2}%
-\contentsline {subsubsection}{\numberline {7.2.3}Bing Grounding via Azure AI Foundry}{16}{subsubsection.7.2.3}%
-\contentsline {subsection}{\numberline {7.3}Section 3: RAG Implementation}{16}{subsection.7.3}%
-\contentsline {subsubsection}{\numberline {7.3.1}Knowledge Ingestion}{16}{subsubsection.7.3.1}%
-\contentsline {subsubsection}{\numberline {7.3.2}Vector Similarity Search}{16}{subsubsection.7.3.2}%
-\contentsline {subsection}{\numberline {7.4}Section 4: Structured Output}{16}{subsection.7.4}%
-\contentsline {subsubsection}{\numberline {7.4.1}Pydantic Data Models}{16}{subsubsection.7.4.1}%
-\contentsline {subsection}{\numberline {7.5}Section 5: Evaluation Harness}{17}{subsection.7.5}%
-\contentsline {subsubsection}{\numberline {7.5.1}LLM-as-Judge Implementation}{17}{subsubsection.7.5.1}%
-\contentsline {subsection}{\numberline {7.6}Section 6: Testing and Quality}{17}{subsection.7.6}%
-\contentsline {subsubsection}{\numberline {7.6.1}Unit Tests}{17}{subsubsection.7.6.1}%
-\contentsline {subsubsection}{\numberline {7.6.2}System Health Check}{17}{subsubsection.7.6.2}%
-\contentsline {section}{\numberline {8}Conclusions}{18}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Technology Stack Summary}{18}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Repository}{18}{subsection.8.2}%
+\contentsline {section}{\numberline {1}Architecture Diagram}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Component Summary}{3}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Azure Resources (Configure Cloud Services)}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Azure OpenAI Deployments}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Bing Grounding Connection (Active)}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Azure Cosmos DB}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Azure AI Foundry Agent with Bing Grounding}{6}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Test Results}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Unit Tests}{8}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}System Health Check}{8}{subsection.3.2}%
+\contentsline {section}{\numberline {4}LLM-as-Judge Evaluation}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Evaluation Criteria and Weights}{11}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Evaluation Results}{11}{subsection.4.2}%
+\contentsline {section}{\numberline {5}RAG Implementation}{13}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Knowledge Base}{13}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Embedding Configuration}{13}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}RAG Ingestion Results}{14}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Key Implementation Details}{15}{section.6}%
+\contentsline {subsection}{\numberline {6.1}8-Phase State Machine}{15}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Tool Integration}{15}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Pydantic Output Validation}{15}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Bing Grounding Integration}{15}{subsection.6.4}%
+\contentsline {section}{\numberline {7}Rubric Compliance}{16}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Rubric 1: Configure Cloud Services}{16}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Rubric 2: Agentic Architecture}{16}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}8-Phase State Machine}{16}{subsubsection.7.2.1}%
+\contentsline {subsubsection}{\numberline {7.2.2}Semantic Kernel Integration}{16}{subsubsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.3}Rubric 3: Azure Services Integration}{17}{subsection.7.3}%
+\contentsline {subsubsection}{\numberline {7.3.1}Azure OpenAI}{17}{subsubsection.7.3.1}%
+\contentsline {subsubsection}{\numberline {7.3.2}Azure Cosmos DB with Vector Search}{17}{subsubsection.7.3.2}%
+\contentsline {subsubsection}{\numberline {7.3.3}Bing Grounding via Azure AI Foundry}{17}{subsubsection.7.3.3}%
+\contentsline {subsection}{\numberline {7.4}Rubric 4: RAG Implementation}{17}{subsection.7.4}%
+\contentsline {subsubsection}{\numberline {7.4.1}Knowledge Ingestion}{17}{subsubsection.7.4.1}%
+\contentsline {subsubsection}{\numberline {7.4.2}Vector Similarity Search}{17}{subsubsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.5}Rubric 5: Structured Output}{17}{subsection.7.5}%
+\contentsline {subsubsection}{\numberline {7.5.1}Pydantic Data Models}{17}{subsubsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.6}Rubric 6: Evaluation Harness}{18}{subsection.7.6}%
+\contentsline {subsubsection}{\numberline {7.6.1}LLM-as-Judge Implementation}{18}{subsubsection.7.6.1}%
+\contentsline {subsection}{\numberline {7.7}Rubric 7: Testing and Quality}{18}{subsection.7.7}%
+\contentsline {subsubsection}{\numberline {7.7.1}Unit Tests}{18}{subsubsection.7.7.1}%
+\contentsline {subsubsection}{\numberline {7.7.2}System Health Check}{18}{subsubsection.7.7.2}%
+\contentsline {section}{\numberline {8}Conclusions}{19}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Technology Stack Summary}{19}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Repository}{19}{subsection.8.2}%

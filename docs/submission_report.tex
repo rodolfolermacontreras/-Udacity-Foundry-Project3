@@ -105,7 +105,7 @@
     \vspace{2cm}
     {\Large\bfseries Student Name: Rodolfo Lerma\par}
     \vspace{0.5cm}
-    {\large Date: February 2, 2026\par}
+    {\large Date: March 9, 2026\par}
     \vspace{2cm}
 
     \begin{tabular}{ll}
@@ -177,7 +177,7 @@ The following diagram illustrates the AI Travel Concierge Agent architecture, sh
     \draw[arrow] (execute) -- (knowledge);
 
     % Azure Services (top right)
-    \node[azure, above=1cm of weather] (aoai) {Azure OpenAI\\gpt-4o};
+    \node[azure, above=1cm of weather] (aoai) {Azure OpenAI\\gpt-4o-mini};
     \node[azure, right=0.5cm of aoai] (cosmos) {Cosmos DB\\Vector Store};
     \node[azure, right=0.5cm of cosmos] (bing) {Bing\\Grounding};
 
@@ -204,8 +204,9 @@ The following diagram illustrates the AI Travel Concierge Agent architecture, sh
 \textbf{Component} & \textbf{Technology} & \textbf{Purpose} \\
 \midrule
 Orchestration & Semantic Kernel 1.36.1 & Agent workflow and tool coordination \\
-LLM & Azure OpenAI gpt-4o & Natural language understanding and generation \\
-Embeddings & text-embedding-3-small & Vector embeddings for RAG retrieval \\
+LLM (Chat) & Azure OpenAI gpt-4o-mini & Primary chat model for agent reasoning and generation \\
+LLM (Agent) & Azure OpenAI gpt-4o & Bing Grounding agent (required for tool support) \\
+Embeddings & text-embedding-3-small & Vector embeddings for RAG retrieval (1536 dims) \\
 Vector Store & Azure Cosmos DB & Knowledge storage with vector search \\
 Web Search & Bing Grounding (AI Foundry) & Real-time travel information retrieval \\
 Validation & Pydantic 2.11.7 & Structured output validation (TripPlan) \\
@@ -218,16 +219,18 @@ Validation & Pydantic 2.11.7 & Structured output validation (TripPlan) \\
 % ============================================================
 % AZURE RESOURCES
 % ============================================================
-\section{Azure Resources}
+\section{Azure Resources (Configure Cloud Services)}
+
+This section demonstrates all cloud services are properly provisioned and active, satisfying Rubric 1: Configure Cloud Services.
 
 \subsection{Azure OpenAI Deployments}
 
-The following models are deployed in the Azure AI Services resource:
+The chat deployment uses \textbf{gpt-4o-mini} as required by the rubric. Three models are deployed:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{Foundry_Models_Deployed.png}
-    \caption{Azure OpenAI Model Deployments showing gpt-4o, gpt-4o-mini, and text-embedding-3-small}
+    \includegraphics[width=0.95\textwidth]{Foundry_Models_Deployed_Updated.png}
+    \caption{Azure OpenAI Model Deployments -- gpt-4o-mini (primary chat), gpt-4o (Bing agent), and text-embedding-3-small}
     \label{fig:deployments}
 \end{figure}
 
@@ -236,14 +239,29 @@ The following models are deployed in the Azure AI Services resource:
 \caption{Model Deployment Configuration}
 \begin{tabular}{llll}
 \toprule
-\textbf{Deployment} & \textbf{Model} & \textbf{Type} & \textbf{TPM} \\
+\textbf{Deployment} & \textbf{Model} & \textbf{Purpose} & \textbf{TPM} \\
 \midrule
-gpt-4o & gpt-4o & GlobalStandard & 10,000 \\
-gpt-4o-mini & gpt-4o-mini & GlobalStandard & 10,000 \\
-text-embedding-3-small & text-embedding-3-small & Standard & 10,000 \\
+gpt-4o-mini & gpt-4o-mini & \textbf{Primary chat model} (Semantic Kernel) & 10,000 \\
+gpt-4o & gpt-4o & Bing Grounding agent (requires gpt-4o) & 10,000 \\
+text-embedding-3-small & text-embedding-3-small & RAG vector embeddings & 10,000 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\textbf{Note}: The Bing Grounding tool in Azure AI Foundry requires gpt-4o (gpt-4o-mini does not support the \texttt{bing\_grounding} tool type). The main Semantic Kernel chat agent uses gpt-4o-mini as shown in logs: \texttt{[OK] Added AzureChatCompletion: gpt-4o-mini}.
+
+\subsection{Bing Grounding Connection (Active)}
+
+The Azure AI Foundry project has an active Bing Grounding connection for real-time web search:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Foundry_Bing_Connection_Active.png}
+    \caption{Azure AI Foundry Connected Resources -- Bing Grounding connection with Active status}
+    \label{fig:bing_connection}
+\end{figure}
+
+This screenshot shows the semantic search connection in \textbf{Active} status with configured credentials, as required by the rubric.
 
 \subsection{Azure Cosmos DB}
 
@@ -263,7 +281,7 @@ Vector-enabled Cosmos DB stores knowledge snippets with embeddings for RAG retri
 \toprule
 \textbf{Setting} & \textbf{Value} \\
 \midrule
-Account Name & udacity-travel-db-410 \\
+Account Name & udacity-travel-db-475 \\
 Database & ragdb \\
 Container & snippets \\
 Partition Key & /pk \\
@@ -294,10 +312,12 @@ The Travel Concierge Agent uses Azure AI Foundry with Bing Grounding for real-ti
 \textbf{Setting} & \textbf{Value} \\
 \midrule
 Project Name & udacity-travel-aoai-project \\
+Hub Name & udacity-travel-hub \\
 Agent Name & Travel Concierge Agent \\
-Agent ID & asst\_NhCbOjFClBRXYD1VSMOnI7hU \\
-Model & gpt-4o \\
+Agent ID & asst\_a5ESlSrIsdBccHI99zLuPb5u \\
+Agent Model & gpt-4o (required for bing\_grounding tool) \\
 Tool & Bing Grounding (Search) \\
+Connection & bing-grounding (Active) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -340,7 +360,14 @@ test\_tools.py & 8 & PASS \\
 
 \subsection{System Health Check}
 
-The system check validates all components are properly configured:
+The system check validates all components are properly configured. The output explicitly confirms the chat deployment is \textbf{gpt-4o-mini}:
+
+\begin{verbatim}
+[OK] AZURE_OPENAI_CHAT_DEPLOYMENT = gpt-4o-mini
+[OK] AZURE_OPENAI_EMBED_DEPLOYMENT = text-embedding-3-small
+  Chat deployment:      gpt-4o-mini
+  Embedding deployment: text-embedding-3-small
+\end{verbatim}
 
 \begin{figure}[H]
     \centering
@@ -371,7 +398,7 @@ The system check validates all components are properly configured:
 \textbf{Check} & \textbf{Status} \\
 \midrule
 Environment Variables & PASS \\
-Azure OpenAI Connection & PASS \\
+Azure OpenAI (gpt-4o-mini) & PASS \\
 Cosmos DB Connection & PASS \\
 Tools (Weather, FX, Search, Card, Knowledge) & PASS \\
 Grounding Search (Bing via AI Foundry) & PASS \\
@@ -391,7 +418,11 @@ Knowledge Base (Card benefits retrieval) & PASS \\
 % ============================================================
 \section{LLM-as-Judge Evaluation}
 
-The agent was evaluated using an LLM-as-Judge approach with weighted scoring across six criteria:
+The agent was evaluated using an LLM-as-Judge approach with weighted scoring across six criteria. All runs confirm \textbf{gpt-4o-mini} as the chat model:
+
+\begin{verbatim}
+[OK] Added AzureChatCompletion: gpt-4o-mini
+\end{verbatim}
 
 \begin{figure}[H]
     \centering
@@ -506,8 +537,8 @@ MCC Benefits & Category-specific reward multipliers \\
 embedding_service = AzureTextEmbedding(
     deployment_name="text-embedding-3-small",
     endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-    api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-    api_version="2024-02-15-preview"
+    api_key=os.getenv("AZURE_OPENAI_KEY"),
+    api_version="2025-01-01-preview"
 )
 
 # Generate embeddings for knowledge snippets
@@ -518,15 +549,6 @@ embeddings = await embedding_service.generate_embeddings([text])
 
 \begin{lstlisting}[basicstyle=\ttfamily\small]
 [START] Starting knowledge base ingestion...
-[OK] Embedding service initialized
-[OK] Connected to Cosmos DB: ragdb/snippets
-[OK] Upserted snippet: bankgold-benefits
-[OK] Upserted snippet: bankpremium-benefits
-[OK] Upserted snippet: bankrewards-benefits
-[OK] Upserted snippet: lounge-rules
-[OK] Upserted snippet: travel-insurance
-[OK] Upserted snippet: dining-mcc
-[OK] Upserted snippet: hotel-mcc
 [OK] Ingested 7 documents
 \end{lstlisting}
 
@@ -608,9 +630,19 @@ thread = project_client.agents.create_thread_and_process_run(
 % ============================================================
 \section{Rubric Compliance}
 
-This section demonstrates how each rubric requirement has been met in the implementation.
+This section maps each rubric requirement to its implementation evidence.
 
-\subsection{Section 1: Agentic Architecture}
+\subsection{Rubric 1: Configure Cloud Services}
+
+\begin{itemize}[noitemsep]
+    \item \textbf{gpt-4o-mini deployed}: See Figure~\ref{fig:deployments} -- deployment screenshot shows gpt-4o-mini with Succeeded status
+    \item \textbf{text-embedding-3-small deployed}: See Figure~\ref{fig:deployments}
+    \item \textbf{Semantic search connection Active}: See Figure~\ref{fig:bing_connection} -- Bing Grounding connection shown with Active status and configured credentials
+    \item \textbf{Logs confirm gpt-4o-mini}: All output logs show \texttt{[OK] Added AzureChatCompletion: gpt-4o-mini}
+    \item \textbf{System check confirms model}: Output shows \texttt{AZURE\_OPENAI\_CHAT\_DEPLOYMENT = gpt-4o-mini}
+\end{itemize}
+
+\subsection{Rubric 2: Agentic Architecture}
 
 \subsubsection{8-Phase State Machine}
 The agent implements a complete 8-phase workflow as required:
@@ -634,54 +666,49 @@ The agent implements a complete 8-phase workflow as required:
 \end{tabular}
 \end{table}
 
-\textbf{Evidence}: See Figure~\ref{fig:syscheck1}, Figure~\ref{fig:syscheck2}, Figure~\ref{fig:syscheck3} for state transitions.
-
 \subsubsection{Semantic Kernel Integration}
-All tools are registered as Semantic Kernel plugins:
+All tools are registered as Semantic Kernel plugins with \texttt{gpt-4o-mini} as the chat completion model:
 
 \begin{lstlisting}[language=Python]
 from semantic_kernel import Kernel
 from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
 
 kernel = Kernel()
-kernel.add_plugin(WeatherTools(), plugin_name="WeatherTools")
-kernel.add_plugin(FxTools(), plugin_name="FxTools")
-kernel.add_plugin(SearchTools(), plugin_name="SearchTools")
-kernel.add_plugin(CardTools(), plugin_name="CardTools")
-kernel.add_plugin(KnowledgeTools(), plugin_name="KnowledgeTools")
+chat_service = AzureChatCompletion(
+    deployment_name="gpt-4o-mini",  # Primary chat model
+    endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+    api_key=os.environ["AZURE_OPENAI_KEY"]
+)
+kernel.add_service(chat_service)
 \end{lstlisting}
 
-\subsection{Section 2: Azure Services Integration}
+\subsection{Rubric 3: Azure Services Integration}
 
 \subsubsection{Azure OpenAI}
-Three models deployed as required:
 \begin{itemize}[noitemsep]
-    \item \textbf{gpt-4o}: Primary chat model for agent reasoning
-    \item \textbf{gpt-4o-mini}: Lightweight model for simple tasks
-    \item \textbf{text-embedding-3-small}: Vector embeddings for RAG
+    \item \textbf{gpt-4o-mini}: Primary chat model for Semantic Kernel agent reasoning
+    \item \textbf{gpt-4o}: Bing Grounding agent (gpt-4o-mini does not support bing\_grounding tool)
+    \item \textbf{text-embedding-3-small}: Vector embeddings for RAG (1536 dimensions)
 \end{itemize}
-\textbf{Evidence}: See Figure~\ref{fig:deployments}
+\textbf{Evidence}: Figure~\ref{fig:deployments}
 
 \subsubsection{Azure Cosmos DB with Vector Search}
-Vector-enabled container stores knowledge embeddings:
 \begin{itemize}[noitemsep]
-    \item Database: \texttt{ragdb}
-    \item Container: \texttt{snippets}
-    \item Partition Key: \texttt{/pk}
-    \item Vector Indexing: Enabled for similarity search
+    \item Database: \texttt{ragdb}, Container: \texttt{snippets}, Partition Key: \texttt{/pk}
+    \item 7 knowledge documents ingested with vector embeddings
+    \item Vector similarity search using \texttt{VectorDistance} function
 \end{itemize}
-\textbf{Evidence}: See Figure~\ref{fig:cosmos}
+\textbf{Evidence}: Figure~\ref{fig:cosmos}
 
 \subsubsection{Bing Grounding via Azure AI Foundry}
-Real-time web search integrated through AI Foundry Agent:
 \begin{itemize}[noitemsep]
-    \item Project: \texttt{udacity-travel-aoai-project}
-    \item Agent: Travel Concierge Agent with Bing tool
+    \item Hub: \texttt{udacity-travel-hub}, Project: \texttt{udacity-travel-aoai-project}
+    \item Connection: \texttt{bing-grounding} with \textbf{Active} status
     \item Authentication: DefaultAzureCredential
 \end{itemize}
-\textbf{Evidence}: See Figure~\ref{fig:bing}
+\textbf{Evidence}: Figure~\ref{fig:bing_connection}, Figure~\ref{fig:bing}
 
-\subsection{Section 3: RAG Implementation}
+\subsection{Rubric 4: RAG Implementation}
 
 \subsubsection{Knowledge Ingestion}
 Seven knowledge documents ingested with embeddings:
@@ -705,7 +732,7 @@ ORDER BY VectorDistance(c.embedding, @queryVector)
 \end{lstlisting}
 \textbf{Evidence}: See Figure~\ref{fig:rag}
 
-\subsection{Section 4: Structured Output}
+\subsection{Rubric 5: Structured Output}
 
 \subsubsection{Pydantic Data Models}
 All outputs validated using Pydantic schemas:
@@ -721,7 +748,7 @@ class TripPlan(BaseModel):
     citations: List[Citation]
 \end{lstlisting}
 
-\subsection{Section 5: Evaluation Harness}
+\subsection{Rubric 6: Evaluation Harness}
 
 \subsubsection{LLM-as-Judge Implementation}
 Weighted scoring across six criteria:
@@ -747,7 +774,7 @@ Citations & 10\% & Sources provided \\
 
 \textbf{Evidence}: See Figure~\ref{fig:llmjudge}
 
-\subsection{Section 6: Testing and Quality}
+\subsection{Rubric 7: Testing and Quality}
 
 \subsubsection{Unit Tests}
 76 unit tests covering all components:
@@ -788,6 +815,7 @@ This project successfully implements an AI Travel Concierge Agent using Semantic
     \item \textbf{Structured Output}: Pydantic-validated TripPlan JSON schema
     \item \textbf{LLM Evaluation}: 3.63/5.00 average score with 100\% pass rate
     \item \textbf{Comprehensive Testing}: 76 unit tests + 8/8 system checks passing
+    \item \textbf{Model Configuration}: gpt-4o-mini as primary chat model per rubric requirements
 \end{enumerate}
 
 \subsection{Technology Stack Summary}
@@ -799,9 +827,10 @@ This project successfully implements an AI Travel Concierge Agent using Semantic
 \textbf{Component} & \textbf{Implementation} \\
 \midrule
 Orchestration & Semantic Kernel 1.36.1 \\
-LLM & Azure OpenAI gpt-4o, gpt-4o-mini \\
+Chat LLM & Azure OpenAI gpt-4o-mini \\
+Agent LLM & Azure OpenAI gpt-4o (Bing Grounding) \\
 Embeddings & text-embedding-3-small (1536 dimensions) \\
-Vector Store & Azure Cosmos DB (serverless) \\
+Vector Store & Azure Cosmos DB (serverless, westus) \\
 Web Search & Bing Grounding via AI Foundry Agent \\
 Weather API & Open-Meteo (free, no auth) \\
 Currency API & Frankfurter (free, no auth) \\
