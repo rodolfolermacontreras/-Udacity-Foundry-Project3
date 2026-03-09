@@ -2,41 +2,40 @@
 ======================================================================
 LLM-AS-JUDGE EVALUATION HARNESS
 Travel Concierge Agent - Performance Evaluation
-Date: 2026-03-09 07:30:32
+Date: 2026-03-09 08:59:39
 ======================================================================
 
 ============================================================
 Evaluating: Test 1: Paris Trip with BankGold
 ============================================================
 Query: I want to go to Paris from 2026-06-01 to 2026-06-08 with my BankGold card
-2026-03-09 07:30:32 - travel_agent - INFO - ============================================================
-2026-03-09 07:30:32 - travel_agent - INFO - [START] Processing request: I want to go to Paris from 2026-06-01 to 2026-06-0...
-2026-03-09 07:30:33 - travel_agent - INFO - [PHASE] Phase: Init - Initialize session and capture user goal
-2026-03-09 07:30:33 - travel_agent - INFO - [PHASE] Phase: ClarifyRequirements - Ask targeted questions to gather required information
-2026-03-09 07:30:33 - travel_agent - INFO - [EXTRACT] Extracted requirements: {'destination': 'Go  Paris', 'dates': '2026-06-01 to 2026-06-08', 'card': 'BankGold'}
-2026-03-09 07:30:33 - travel_agent - INFO - [PHASE] Phase: PlanTools - Decide which tools to call and with what parameters
-2026-03-09 07:30:33 - travel_agent - INFO - [INIT] Creating Semantic Kernel...
-2026-03-09 07:30:33 - travel_agent - INFO - [OK] Added AzureChatCompletion: gpt-4o-mini
-2026-03-09 07:30:34 - travel_agent - INFO - [OK] Added AzureTextEmbedding: text-embedding-3-small
-2026-03-09 07:30:34 - travel_agent - INFO - [OK] Registered all tool plugins
-2026-03-09 07:30:34 - travel_agent - INFO - [OK] Set up kernel filters
-2026-03-09 07:30:34 - travel_agent - INFO - [PHASE] Phase: ExecuteTools - Execute planned tools and collect results
-2026-03-09 07:30:44 - travel_agent - INFO - [OK] Weather data retrieved for Go  Paris
-2026-03-09 07:31:15 - travel_agent - INFO - [OK] FX data retrieved: USD to EUR
-Agent run status: RunStatus.FAILED
-2026-03-09 07:31:23 - travel_agent - INFO - [OK] Search results retrieved for Go  Paris
-2026-03-09 07:31:23 - travel_agent - INFO - [OK] Card recommendation retrieved
+2026-03-09 08:59:39 - travel_agent - INFO - ============================================================
+2026-03-09 08:59:39 - travel_agent - INFO - [START] Processing request: I want to go to Paris from 2026-06-01 to 2026-06-0...
+2026-03-09 08:59:40 - travel_agent - INFO - [PHASE] Phase: Init - Initialize session and capture user goal
+2026-03-09 08:59:40 - travel_agent - INFO - [PHASE] Phase: ClarifyRequirements - Ask targeted questions to gather required information
+2026-03-09 08:59:40 - travel_agent - INFO - [EXTRACT] Extracted requirements: {'destination': 'Go  Paris', 'dates': '2026-06-01 to 2026-06-08', 'card': 'BankGold'}
+2026-03-09 08:59:40 - travel_agent - INFO - [PHASE] Phase: PlanTools - Decide which tools to call and with what parameters
+2026-03-09 08:59:40 - travel_agent - INFO - [INIT] Creating Semantic Kernel...
+2026-03-09 08:59:40 - travel_agent - INFO - [OK] Added AzureChatCompletion: gpt-4o-mini
+2026-03-09 08:59:40 - travel_agent - INFO - [OK] Added AzureTextEmbedding: text-embedding-3-small
+2026-03-09 08:59:40 - travel_agent - INFO - [OK] Registered all tool plugins
+2026-03-09 08:59:40 - travel_agent - INFO - [OK] Set up kernel filters
+2026-03-09 08:59:40 - travel_agent - INFO - [PHASE] Phase: ExecuteTools - Execute planned tools and collect results
+2026-03-09 08:59:51 - travel_agent - INFO - [OK] Weather data retrieved for Go  Paris
+2026-03-09 09:00:32 - travel_agent - INFO - [OK] FX data retrieved: USD to EUR
+2026-03-09 09:00:40 - travel_agent - INFO - [OK] Search results retrieved for Go  Paris
+2026-03-09 09:00:40 - travel_agent - INFO - [OK] Card recommendation retrieved
 [ERROR] Retrieval error: This event loop is already running
 C:\Training\Udacity\Microsoft_Foundry\Projects\Project_3\app\rag\retriever.py:232: RuntimeWarning: coroutine 'generate_query_embedding' was never awaited
   return [{"error": str(e)}]
 RuntimeWarning: Enable tracemalloc to get the object allocation traceback
-2026-03-09 07:31:25 - travel_agent - INFO - [OK] Knowledge base info retrieved
-2026-03-09 07:31:25 - travel_agent - INFO - [PHASE] Phase: AnalyzeResults - Process tool outputs and validate data completeness
-2026-03-09 07:31:25 - travel_agent - INFO - [PHASE] Phase: ResolveIssues - Handle any problems or edge cases identified
-2026-03-09 07:31:25 - travel_agent - INFO - [PHASE] Phase: ProduceStructuredOutput - Generate Pydantic-validated JSON and natural language summary
-2026-03-09 07:31:25 - travel_agent - INFO - [PHASE] Phase: Done - Process complete
-2026-03-09 07:31:25 - travel_agent - INFO - [OK] Request processed successfully
-2026-03-09 07:31:25 - travel_agent - INFO - [SUMMARY] State Summary: {'session_id': '4315c6ed-2cd5-441d-b2f9-5bec4b3eaf15', 'phase': 'Done', 'phase_description': 'Process complete', 'created_at': '2026-03-09T14:30:32.872857', 'updated_at': '2026-03-09T14:31:25.366047', 'requirements': {'destination': 'Go  Paris', 'dates': '2026-06-01 to 2026-06-08', 'card': 'BankGold'}, 'tools_called': ['weather', 'fx', 'search', 'card', 'knowledge'], 'tool_errors': [], 'issues': [], 'resolved_issues': [], 'data_completeness': 1.0, 'has_structured_output': True, 'citations_count': 3}
+2026-03-09 09:00:42 - travel_agent - INFO - [OK] Knowledge base info retrieved
+2026-03-09 09:00:42 - travel_agent - INFO - [PHASE] Phase: AnalyzeResults - Process tool outputs and validate data completeness
+2026-03-09 09:00:42 - travel_agent - INFO - [PHASE] Phase: ResolveIssues - Handle any problems or edge cases identified
+2026-03-09 09:00:42 - travel_agent - INFO - [PHASE] Phase: ProduceStructuredOutput - Generate Pydantic-validated JSON and natural language summary
+2026-03-09 09:00:42 - travel_agent - INFO - [PHASE] Phase: Done - Process complete
+2026-03-09 09:00:42 - travel_agent - INFO - [OK] Request processed successfully
+2026-03-09 09:00:42 - travel_agent - INFO - [SUMMARY] State Summary: {'session_id': '3671baa9-b89c-4dde-9c86-df5e6004d640', 'phase': 'Done', 'phase_description': 'Process complete', 'created_at': '2026-03-09T15:59:39.755844', 'updated_at': '2026-03-09T16:00:42.290818', 'requirements': {'destination': 'Go  Paris', 'dates': '2026-06-01 to 2026-06-08', 'card': 'BankGold'}, 'tools_called': ['weather', 'fx', 'search', 'card', 'knowledge'], 'tool_errors': [], 'issues': [], 'resolved_issues': [], 'data_completeness': 1.0, 'has_structured_output': True, 'citations_count': 3}
 [OK] Valid JSON response
 
 --- Criterion Scores (0-5 scale) ---
@@ -55,31 +54,30 @@ RuntimeWarning: Enable tracemalloc to get the object allocation traceback
 Evaluating: Test 2: Tokyo Trip with BankPlatinum
 ============================================================
 Query: Plan a trip to Tokyo from July 10-17, 2026. I have a BankPlatinum card
-2026-03-09 07:31:25 - travel_agent - INFO - ============================================================
-2026-03-09 07:31:25 - travel_agent - INFO - [START] Processing request: Plan a trip to Tokyo from July 10-17, 2026. I have...
-2026-03-09 07:31:25 - travel_agent - INFO - [PHASE] Phase: Init - Initialize session and capture user goal
-2026-03-09 07:31:25 - travel_agent - INFO - [PHASE] Phase: ClarifyRequirements - Ask targeted questions to gather required information
-2026-03-09 07:31:25 - travel_agent - INFO - [EXTRACT] Extracted requirements: {'destination': 'Tokyo', 'dates': 'July 10 to 17', 'card': 'BankPlatinum'}
-2026-03-09 07:31:25 - travel_agent - INFO - [PHASE] Phase: PlanTools - Decide which tools to call and with what parameters
-2026-03-09 07:31:25 - travel_agent - INFO - [INIT] Creating Semantic Kernel...
-2026-03-09 07:31:25 - travel_agent - INFO - [OK] Added AzureChatCompletion: gpt-4o-mini
-2026-03-09 07:31:26 - travel_agent - INFO - [OK] Added AzureTextEmbedding: text-embedding-3-small
-2026-03-09 07:31:26 - travel_agent - INFO - [OK] Registered all tool plugins
-2026-03-09 07:31:26 - travel_agent - INFO - [OK] Set up kernel filters
-2026-03-09 07:31:26 - travel_agent - INFO - [PHASE] Phase: ExecuteTools - Execute planned tools and collect results
-2026-03-09 07:31:37 - travel_agent - INFO - [OK] Weather data retrieved for Tokyo
-2026-03-09 07:32:08 - travel_agent - INFO - [OK] FX data retrieved: USD to JPY
-Agent run status: RunStatus.FAILED
-2026-03-09 07:32:16 - travel_agent - INFO - [OK] Search results retrieved for Tokyo
+2026-03-09 09:00:42 - travel_agent - INFO - ============================================================
+2026-03-09 09:00:42 - travel_agent - INFO - [START] Processing request: Plan a trip to Tokyo from July 10-17, 2026. I have...
+2026-03-09 09:00:42 - travel_agent - INFO - [PHASE] Phase: Init - Initialize session and capture user goal
+2026-03-09 09:00:42 - travel_agent - INFO - [PHASE] Phase: ClarifyRequirements - Ask targeted questions to gather required information
+2026-03-09 09:00:42 - travel_agent - INFO - [EXTRACT] Extracted requirements: {'destination': 'Tokyo', 'dates': 'July 10 to 17', 'card': 'BankPlatinum'}
+2026-03-09 09:00:42 - travel_agent - INFO - [PHASE] Phase: PlanTools - Decide which tools to call and with what parameters
+2026-03-09 09:00:42 - travel_agent - INFO - [INIT] Creating Semantic Kernel...
+2026-03-09 09:00:42 - travel_agent - INFO - [OK] Added AzureChatCompletion: gpt-4o-mini
+2026-03-09 09:00:43 - travel_agent - INFO - [OK] Added AzureTextEmbedding: text-embedding-3-small
+2026-03-09 09:00:43 - travel_agent - INFO - [OK] Registered all tool plugins
+2026-03-09 09:00:43 - travel_agent - INFO - [OK] Set up kernel filters
+2026-03-09 09:00:43 - travel_agent - INFO - [PHASE] Phase: ExecuteTools - Execute planned tools and collect results
+2026-03-09 09:00:54 - travel_agent - INFO - [OK] Weather data retrieved for Tokyo
+2026-03-09 09:01:31 - travel_agent - INFO - [OK] FX data retrieved: USD to JPY
+2026-03-09 09:01:41 - travel_agent - INFO - [OK] Search results retrieved for Tokyo
+2026-03-09 09:01:41 - travel_agent - INFO - [OK] Card recommendation retrieved
 [ERROR] Retrieval error: This event loop is already running
-2026-03-09 07:32:16 - travel_agent - INFO - [OK] Card recommendation retrieved
-2026-03-09 07:32:16 - travel_agent - INFO - [OK] Knowledge base info retrieved
-2026-03-09 07:32:16 - travel_agent - INFO - [PHASE] Phase: AnalyzeResults - Process tool outputs and validate data completeness
-2026-03-09 07:32:16 - travel_agent - INFO - [PHASE] Phase: ResolveIssues - Handle any problems or edge cases identified
-2026-03-09 07:32:16 - travel_agent - INFO - [PHASE] Phase: ProduceStructuredOutput - Generate Pydantic-validated JSON and natural language summary
-2026-03-09 07:32:16 - travel_agent - INFO - [PHASE] Phase: Done - Process complete
-2026-03-09 07:32:16 - travel_agent - INFO - [OK] Request processed successfully
-2026-03-09 07:32:16 - travel_agent - INFO - [SUMMARY] State Summary: {'session_id': '71775b70-31e8-45f7-9054-2c52df66e28d', 'phase': 'Done', 'phase_description': 'Process complete', 'created_at': '2026-03-09T14:31:25.398419', 'updated_at': '2026-03-09T14:32:16.349540', 'requirements': {'destination': 'Tokyo', 'dates': 'July 10 to 17', 'card': 'BankPlatinum'}, 'tools_called': ['weather', 'fx', 'search', 'card', 'knowledge'], 'tool_errors': [], 'issues': [], 'resolved_issues': [], 'data_completeness': 1.0, 'has_structured_output': True, 'citations_count': 2}
+2026-03-09 09:01:41 - travel_agent - INFO - [OK] Knowledge base info retrieved
+2026-03-09 09:01:41 - travel_agent - INFO - [PHASE] Phase: AnalyzeResults - Process tool outputs and validate data completeness
+2026-03-09 09:01:41 - travel_agent - INFO - [PHASE] Phase: ResolveIssues - Handle any problems or edge cases identified
+2026-03-09 09:01:41 - travel_agent - INFO - [PHASE] Phase: ProduceStructuredOutput - Generate Pydantic-validated JSON and natural language summary
+2026-03-09 09:01:41 - travel_agent - INFO - [PHASE] Phase: Done - Process complete
+2026-03-09 09:01:41 - travel_agent - INFO - [OK] Request processed successfully
+2026-03-09 09:01:41 - travel_agent - INFO - [SUMMARY] State Summary: {'session_id': '20f1b26e-bd18-4503-9048-6fea7b526287', 'phase': 'Done', 'phase_description': 'Process complete', 'created_at': '2026-03-09T16:00:42.307835', 'updated_at': '2026-03-09T16:01:41.145950', 'requirements': {'destination': 'Tokyo', 'dates': 'July 10 to 17', 'card': 'BankPlatinum'}, 'tools_called': ['weather', 'fx', 'search', 'card', 'knowledge'], 'tool_errors': [], 'issues': [], 'resolved_issues': [], 'data_completeness': 1.0, 'has_structured_output': True, 'citations_count': 2}
 [OK] Valid JSON response
 
 --- Criterion Scores (0-5 scale) ---
@@ -98,31 +96,30 @@ Agent run status: RunStatus.FAILED
 Evaluating: Test 3: Barcelona Trip with BankRewards
 ============================================================
 Query: I want to visit Barcelona from August 15-22, 2026 with my BankRewards card
-2026-03-09 07:32:16 - travel_agent - INFO - ============================================================
-2026-03-09 07:32:16 - travel_agent - INFO - [START] Processing request: I want to visit Barcelona from August 15-22, 2026 ...
-2026-03-09 07:32:16 - travel_agent - INFO - [PHASE] Phase: Init - Initialize session and capture user goal
-2026-03-09 07:32:16 - travel_agent - INFO - [PHASE] Phase: ClarifyRequirements - Ask targeted questions to gather required information
-2026-03-09 07:32:16 - travel_agent - INFO - [EXTRACT] Extracted requirements: {'destination': 'Visit Barcelona', 'dates': 'August 15 to 22', 'card': 'BankRewards'}
-2026-03-09 07:32:16 - travel_agent - INFO - [PHASE] Phase: PlanTools - Decide which tools to call and with what parameters
-2026-03-09 07:32:16 - travel_agent - INFO - [INIT] Creating Semantic Kernel...
-2026-03-09 07:32:16 - travel_agent - INFO - [OK] Added AzureChatCompletion: gpt-4o-mini
-2026-03-09 07:32:17 - travel_agent - INFO - [OK] Added AzureTextEmbedding: text-embedding-3-small
-2026-03-09 07:32:17 - travel_agent - INFO - [OK] Registered all tool plugins
-2026-03-09 07:32:17 - travel_agent - INFO - [OK] Set up kernel filters
-2026-03-09 07:32:17 - travel_agent - INFO - [PHASE] Phase: ExecuteTools - Execute planned tools and collect results
-2026-03-09 07:32:28 - travel_agent - INFO - [OK] Weather data retrieved for Visit Barcelona
-2026-03-09 07:32:59 - travel_agent - INFO - [OK] FX data retrieved: USD to EUR
-Agent run status: RunStatus.FAILED
-2026-03-09 07:33:08 - travel_agent - INFO - [OK] Search results retrieved for Visit Barcelona
-2026-03-09 07:33:08 - travel_agent - INFO - [OK] Card recommendation retrieved
+2026-03-09 09:01:41 - travel_agent - INFO - ============================================================
+2026-03-09 09:01:41 - travel_agent - INFO - [START] Processing request: I want to visit Barcelona from August 15-22, 2026 ...
+2026-03-09 09:01:41 - travel_agent - INFO - [PHASE] Phase: Init - Initialize session and capture user goal
+2026-03-09 09:01:41 - travel_agent - INFO - [PHASE] Phase: ClarifyRequirements - Ask targeted questions to gather required information
+2026-03-09 09:01:41 - travel_agent - INFO - [EXTRACT] Extracted requirements: {'destination': 'Visit Barcelona', 'dates': 'August 15 to 22', 'card': 'BankRewards'}
+2026-03-09 09:01:41 - travel_agent - INFO - [PHASE] Phase: PlanTools - Decide which tools to call and with what parameters
+2026-03-09 09:01:41 - travel_agent - INFO - [INIT] Creating Semantic Kernel...
+2026-03-09 09:01:42 - travel_agent - INFO - [OK] Added AzureChatCompletion: gpt-4o-mini
+2026-03-09 09:01:43 - travel_agent - INFO - [OK] Added AzureTextEmbedding: text-embedding-3-small
+2026-03-09 09:01:43 - travel_agent - INFO - [OK] Registered all tool plugins
+2026-03-09 09:01:43 - travel_agent - INFO - [OK] Set up kernel filters
+2026-03-09 09:01:43 - travel_agent - INFO - [PHASE] Phase: ExecuteTools - Execute planned tools and collect results
+2026-03-09 09:01:55 - travel_agent - INFO - [OK] Weather data retrieved for Visit Barcelona
+2026-03-09 09:02:27 - travel_agent - INFO - [OK] FX data retrieved: USD to EUR
+2026-03-09 09:02:36 - travel_agent - INFO - [OK] Search results retrieved for Visit Barcelona
+2026-03-09 09:02:36 - travel_agent - INFO - [OK] Card recommendation retrieved
 [ERROR] Retrieval error: This event loop is already running
-2026-03-09 07:33:08 - travel_agent - INFO - [OK] Knowledge base info retrieved
-2026-03-09 07:33:08 - travel_agent - INFO - [PHASE] Phase: AnalyzeResults - Process tool outputs and validate data completeness
-2026-03-09 07:33:08 - travel_agent - INFO - [PHASE] Phase: ResolveIssues - Handle any problems or edge cases identified
-2026-03-09 07:33:08 - travel_agent - INFO - [PHASE] Phase: ProduceStructuredOutput - Generate Pydantic-validated JSON and natural language summary
-2026-03-09 07:33:08 - travel_agent - INFO - [PHASE] Phase: Done - Process complete
-2026-03-09 07:33:08 - travel_agent - INFO - [OK] Request processed successfully
-2026-03-09 07:33:08 - travel_agent - INFO - [SUMMARY] State Summary: {'session_id': '92bad6d9-8913-459f-b962-9ec24c9114ea', 'phase': 'Done', 'phase_description': 'Process complete', 'created_at': '2026-03-09T14:32:16.349540', 'updated_at': '2026-03-09T14:33:08.039558', 'requirements': {'destination': 'Visit Barcelona', 'dates': 'August 15 to 22', 'card': 'BankRewards'}, 'tools_called': ['weather', 'fx', 'search', 'card', 'knowledge'], 'tool_errors': [], 'issues': [], 'resolved_issues': [], 'data_completeness': 1.0, 'has_structured_output': True, 'citations_count': 2}
+2026-03-09 09:02:36 - travel_agent - INFO - [OK] Knowledge base info retrieved
+2026-03-09 09:02:36 - travel_agent - INFO - [PHASE] Phase: AnalyzeResults - Process tool outputs and validate data completeness
+2026-03-09 09:02:36 - travel_agent - INFO - [PHASE] Phase: ResolveIssues - Handle any problems or edge cases identified
+2026-03-09 09:02:36 - travel_agent - INFO - [PHASE] Phase: ProduceStructuredOutput - Generate Pydantic-validated JSON and natural language summary
+2026-03-09 09:02:36 - travel_agent - INFO - [PHASE] Phase: Done - Process complete
+2026-03-09 09:02:36 - travel_agent - INFO - [OK] Request processed successfully
+2026-03-09 09:02:36 - travel_agent - INFO - [SUMMARY] State Summary: {'session_id': '7d77fb68-ac67-47aa-944d-4544dddb3333', 'phase': 'Done', 'phase_description': 'Process complete', 'created_at': '2026-03-09T16:01:41.158947', 'updated_at': '2026-03-09T16:02:36.718810', 'requirements': {'destination': 'Visit Barcelona', 'dates': 'August 15 to 22', 'card': 'BankRewards'}, 'tools_called': ['weather', 'fx', 'search', 'card', 'knowledge'], 'tool_errors': [], 'issues': [], 'resolved_issues': [], 'data_completeness': 1.0, 'has_structured_output': True, 'citations_count': 2}
 [OK] Valid JSON response
 
 --- Criterion Scores (0-5 scale) ---

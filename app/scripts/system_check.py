@@ -27,12 +27,18 @@ def check_environment():
     ]
     missing = [v for v in required_vars if not os.environ.get(v)]
     for v in required_vars:
-        print(f"{'[OK]' if v not in missing else '[MISSING]'} {v}")
+        val_preview = os.environ.get(v, "")
+        if v in ("AZURE_OPENAI_CHAT_DEPLOYMENT", "AZURE_OPENAI_EMBED_DEPLOYMENT"):
+            print(f"{'[OK]' if v not in missing else '[MISSING]'} {v} = {val_preview}")
+        else:
+            print(f"{'[OK]' if v not in missing else '[MISSING]'} {v}")
     return len(missing) == 0
 
 def check_azure_openai():
     print("\n[CHECK] Azure OpenAI Service")
     print("-" * 40)
+    print(f"  Chat deployment:      {os.environ.get('AZURE_OPENAI_CHAT_DEPLOYMENT', 'NOT SET')}")
+    print(f"  Embedding deployment: {os.environ.get('AZURE_OPENAI_EMBED_DEPLOYMENT', 'NOT SET')}")
     try:
         import asyncio
         from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion, AzureTextEmbedding

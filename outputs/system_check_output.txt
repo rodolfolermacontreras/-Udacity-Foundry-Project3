@@ -1,8 +1,6 @@
-Agent run status: RunStatus.FAILED
-Agent run status: RunStatus.FAILED
 Travel Concierge Agent - System Health Check
 ============================================================
-Timestamp: 2026-03-09 07:33:14
+Timestamp: 2026-03-09 08:57:49
 
 
 [RUNNING] Environment Variables...
@@ -11,8 +9,8 @@ Timestamp: 2026-03-09 07:33:14
 ----------------------------------------
 [OK] AZURE_OPENAI_ENDPOINT
 [OK] AZURE_OPENAI_API_VERSION
-[OK] AZURE_OPENAI_CHAT_DEPLOYMENT
-[OK] AZURE_OPENAI_EMBED_DEPLOYMENT
+[OK] AZURE_OPENAI_CHAT_DEPLOYMENT = gpt-4o-mini
+[OK] AZURE_OPENAI_EMBED_DEPLOYMENT = text-embedding-3-small
 [OK] AZURE_OPENAI_KEY
 [OK] COSMOS_ENDPOINT
 [OK] COSMOS_KEY
@@ -24,6 +22,8 @@ Timestamp: 2026-03-09 07:33:14
 
 [CHECK] Azure OpenAI Service
 ----------------------------------------
+  Chat deployment:      gpt-4o-mini
+  Embedding deployment: text-embedding-3-small
 [OK] Chat: pong
 [OK] Embedding: 1536 dimensions
 
@@ -31,16 +31,16 @@ Timestamp: 2026-03-09 07:33:14
 
 [CHECK] Cosmos DB Service
 ----------------------------------------
-[OK] Cosmos DB connected (found 0 item(s))
+[OK] Cosmos DB connected (found 1 item(s))
 
 [RUNNING] Tools...
 
 [CHECK] Tool Integration
 ----------------------------------------
 [OK] Weather: N/AC
-[OK] FX: 100 USD = 86.5 EUR
+[OK] FX: 100 USD = 86.54 EUR
 [OK] Card: N/A
-[OK] Knowledge: Found 0 results
+[OK] Knowledge: Found 5 results
 [OK] Search: 1 result(s)
 [OK] All tools working
 
