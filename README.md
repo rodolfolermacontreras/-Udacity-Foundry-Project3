@@ -4,16 +4,120 @@ AI Travel Concierge Agent for Banking International premium credit card customer
 
 **Project**: Udacity AI Agents with Azure Foundry - Project 3
 
+## Architecture
+
+### System Overview
+
+```mermaid
+graph TB
+    subgraph UI["User Interface"]
+        SL["Streamlit App<br/>(streamlit_app.py)"]
+        CLI["CLI Chat<br/>(chat.py)"]
+    end
+
+    subgraph SK["Semantic Kernel Orchestration"]
+        MAIN["app/main.py<br/>run_request()"]
+        STATE["State Machine<br/>8 Phases"]
+        MEM["Memory<br/>Short-term + Long-term"]
+    end
+
+    subgraph TOOLS["Tool Plugins"]
+        W["WeatherTools<br/>Open-Meteo API"]
+        FX["FxTools<br/>Frankfurter API"]
+        S["SearchTools<br/>Bing Grounding"]
+        C["CardTools<br/>Recommendation Engine"]
+        K["KnowledgeTools<br/>RAG Retrieval"]
+    end
+
+    subgraph AZURE["Azure Services"]
+        AOAI["Azure OpenAI<br/>gpt-4o-mini (chat)<br/>text-embedding-3-small"]
+        COSMOS["Cosmos DB<br/>Vector Store (ragdb/snippets)"]
+        BING["AI Foundry Agent<br/>Bing Grounding (gpt-4o)"]
+    end
+
+    subgraph OUTPUT["Structured Output"]
+        PYDANTIC["Pydantic Validation<br/>TripPlan Schema"]
+        JSON["JSON Response"]
+    end
+
+    SL --> MAIN
+    CLI --> MAIN
+    MAIN --> STATE
+    MAIN --> MEM
+    STATE --> W & FX & S & C & K
+    W --> MAIN
+    FX --> MAIN
+    S --> BING
+    K --> COSMOS
+    MAIN --> AOAI
+    K --> AOAI
+    MAIN --> PYDANTIC --> JSON
+```
+
+### Agent State Machine
+
+```mermaid
+stateDiagram-v2
+    [*] --> Init
+    Init --> ClarifyRequirements: Extract user intent
+    ClarifyRequirements --> PlanTools: Requirements captured
+    PlanTools --> ExecuteTools: Tools selected
+    ExecuteTools --> AnalyzeResults: Tools complete
+    AnalyzeResults --> ResolveIssues: Results analyzed
+    ResolveIssues --> ProduceStructuredOutput: Issues resolved
+    ProduceStructuredOutput --> Done: TripPlan validated
+    Done --> [*]
+
+    note right of Init: Validate config, capture goal
+    note right of ExecuteTools: Weather, FX, Search, Card, Knowledge
+    note right of ProduceStructuredOutput: Pydantic TripPlan JSON
+```
+
+### Data Flow
+
+```mermaid
+flowchart LR
+    USER["User Query"] --> EXTRACT["Extract<br/>Requirements"]
+    EXTRACT --> |destination, dates, card| TOOLS["Execute Tools"]
+    
+    TOOLS --> WEATHER["Weather API"]
+    TOOLS --> CURRENCY["Currency API"]
+    TOOLS --> SEARCH["Bing Search"]
+    TOOLS --> CARD["Card Engine"]
+    TOOLS --> RAG["Knowledge RAG"]
+    
+    RAG --> |vector search| COSMOS[("Cosmos DB")]
+    SEARCH --> |web search| BING["Bing Grounding"]
+    
+    WEATHER & CURRENCY & SEARCH & CARD & RAG --> SYNTH["Synthesize"]
+    SYNTH --> VALIDATE["Pydantic<br/>Validation"]
+    VALIDATE --> TRIP["TripPlan JSON"]
+```
+
+### Component Summary
+
+| Component | Technology | Purpose |
+|-----------|-----------|---------|
+| Orchestration | Semantic Kernel 1.36.1 | Agent workflow and tool coordination |
+| Chat LLM | Azure OpenAI gpt-4o-mini | Primary chat model for agent reasoning |
+| Agent LLM | Azure OpenAI gpt-4o | Bing Grounding agent (requires gpt-4o) |
+| Embeddings | text-embedding-3-small | Vector embeddings for RAG (1536 dims) |
+| Vector Store | Azure Cosmos DB | Knowledge storage with vector search |
+| Web Search | Bing Grounding (AI Foundry) | Real-time travel information |
+| Validation | Pydantic 2.11.7 | Structured output validation (TripPlan) |
+| UI | Streamlit | Interactive web interface |
+
 ## Quick Start
 
 ### Prerequisites
 
 - Python 3.12+
 - Azure OpenAI service with:
-  - gpt-4o deployment (chat)
+  - gpt-4o-mini deployment (chat)
+  - gpt-4o deployment (Bing Grounding agent)
   - text-embedding-3-small deployment (embeddings)
 - Azure Cosmos DB account with vector search enabled
-- Azure AI Foundry project with Bing Grounding (for live web search)
+- Azure AI Foundry project with Bing Grounding
 
 ### Installation
 
@@ -33,7 +137,12 @@ cp env.example .env
 
 ### Usage
 
-**Chat Interface (Recommended)**
+**Streamlit UI (Recommended)**
+```bash
+streamlit run streamlit_app.py
+```
+
+**Chat CLI**
 ```bash
 python chat.py
 ```
@@ -48,30 +157,6 @@ result = asyncio.run(run_request("Plan a trip to Paris from June 1-8 with my Ban
 plan_data = json.loads(result)
 print(plan_data["plan"]["destination"])
 ```
-
-## Architecture
-
-| Component | Description |
-|-----------|-------------|
-| Semantic Kernel | Tool orchestration and state management |
-| Azure OpenAI | gpt-4o (chat), text-embedding-3-small (embeddings) |
-| Memory Systems | Short-term (session) and long-term (persistent) memory |
-| Cosmos DB | Vector RAG for knowledge retrieval |
-| AI Foundry Agent | Bing Grounding for real-time web search |
-| Tools | WeatherTools, FxTools, SearchTools, CardTools, KnowledgeTools |
-
-### Agent State Machine
-
-The agent uses an 8-phase state machine:
-
-1. **Init** - Initialize agent and validate configuration
-2. **ClarifyRequirements** - Extract travel requirements from user input
-3. **PlanTools** - Determine which tools to execute
-4. **ExecuteTools** - Run selected tools
-5. **AnalyzeResults** - Analyze tool outputs
-6. **ResolveIssues** - Handle any issues
-7. **ProduceStructuredOutput** - Generate TripPlan
-8. **Done** - Return results
 
 ## Development
 
@@ -118,8 +203,9 @@ app/
     utils/               # Utility modules
         config.py        # Configuration management
         logger.py        # Logging setup
-tests/                   # Unit tests
+tests/                   # Unit tests (76 tests)
 chat.py                  # CLI chat interface
+streamlit_app.py         # Streamlit web UI
 ```
 
 ## Documentation
@@ -136,12 +222,15 @@ chat.py                  # CLI chat interface
 - [x] RAG with Cosmos DB vector search
 - [x] Pydantic data models
 - [x] Unit tests (76 passing)
-- [x] Azure OpenAI integration (gpt-4o, text-embedding-3-small)
+- [x] Azure OpenAI integration (gpt-4o-mini chat, gpt-4o agent)
 - [x] Cosmos DB vector search
 - [x] AI Foundry Agent with Bing Grounding
+- [x] LLM-as-Judge evaluation (3.63/5.00)
+- [x] Streamlit web UI
 
-**Azure Resources (Udacity Account):**
-- Azure AI Services: `udacity-travel-aoai` (West US)
-- Cosmos DB: `udacity-travel-db-410` (West US)
+**Azure Resources:**
+- Azure AI Services: `udacity-travel-aoai-475` (West US)
+- Cosmos DB: `udacity-travel-db-475` (West US, serverless)
+- AI Foundry Hub: `udacity-travel-hub`
 - AI Foundry Project: `udacity-travel-aoai-project`
-- Bing Grounding: `udacity-travel-bing-grounding`
+- Bing Grounding: `bing-grounding` (Active)

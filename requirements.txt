@@ -17,6 +17,9 @@ semantic-kernel==1.36.1
 # Optional: For better performance
 numpy==2.3.2
 
+# UI
+streamlit>=1.45.0
+
 # Testing
 pytest==8.0.0
 pytest-mock==3.12.0
